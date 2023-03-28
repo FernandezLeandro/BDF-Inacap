@@ -30,4 +30,6 @@ public class CompanyDE {
 
     public String email;
 
+    public Boolean estadoAlta;
+
 }

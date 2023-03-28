@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -19,7 +20,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
     @Override
     public List<CompanyDE> getAll() {
-        return this.companyRepository.findAll();
+        return this.companyRepository.findAll().stream().filter(x -> x.getEstadoAlta()).collect(Collectors.toList());
     }
 
     @Override
@@ -32,6 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyDE companyToDelete =  this.getCompanyByID(id);
         if (!isCompanyNull(companyToDelete)) {
             this.companyRepository.delete(companyToDelete);
+            companyToDelete.setEstadoAlta(false);
             //return this.companyMapper.deToDto(companyToDelete);
         }
         return companyToDelete; // Agregar excepciones o response entity personalizado (iria en service?)
