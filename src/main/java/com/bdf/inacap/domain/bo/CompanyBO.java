@@ -4,7 +4,7 @@ public class CompanyBO {
 
     public Long id;
 
-    public String name;
+    public String nameCompany;
 
     public Long cuit;
 
