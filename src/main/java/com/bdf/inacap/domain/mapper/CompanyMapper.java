@@ -1,6 +1,7 @@
 package com.bdf.inacap.domain.mapper;
 
 import com.bdf.inacap.domain.entity.CompanyDE;
+import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

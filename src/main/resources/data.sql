@@ -1,0 +1,2 @@
+INSERT INTO company (name,cuit,bussines_name,contact_name,contact_number,email) VALUES('bdf','SA', 27422494577,'Agus',1159936534,'agus@gmail.com');
+INSERT INTO company (name,cuit,bussines_name,contact_name,contact_number,email) VALUES('test1','RRR', 22402392686,'Lean',1196524153,'lean@gmail.com');
