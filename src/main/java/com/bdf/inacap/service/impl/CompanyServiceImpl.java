@@ -32,9 +32,8 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyDE deleteByID(Long id) {
         CompanyDE companyToDelete =  this.getCompanyByID(id);
         if (!isCompanyNull(companyToDelete)) {
-            this.companyRepository.delete(companyToDelete);
             companyToDelete.setEstadoAlta(false);
-            //return this.companyMapper.deToDto(companyToDelete);
+            this.companyRepository.save(companyToDelete);
         }
         return companyToDelete; // Agregar excepciones o response entity personalizado (iria en service?)
     }
