@@ -17,6 +17,7 @@ public class CompanyControllerImpl implements CompanyController{
 
     private CompanyService companyService;
     private CompanyMapper companyMapper;
+
     @Autowired
     public CompanyControllerImpl (CompanyService companyService, CompanyMapper companyMapper){
         this.companyService = companyService;
@@ -33,8 +34,9 @@ public class CompanyControllerImpl implements CompanyController{
     }
 
     @Override
+    @GetMapping("{cuit}")
     public ResponseEntity<CompanyDTO> getByCuit(Long cuit) {
-        return null;
+        return ResponseEntity.ok(this.companyMapper.deToDTO(this.companyService.getCompanyByCuit(cuit)));
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.bdf.inacap.service.impl;
 
 import com.bdf.inacap.domain.entity.CompanyDE;
 import com.bdf.inacap.repository.CompanyRepository;
-import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import com.bdf.inacap.service.interfaces.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,9 +42,15 @@ public class CompanyServiceImpl implements CompanyService {
         return null;
     }
 
+
     private CompanyDE getCompanyByID(Long id) {
         Optional<CompanyDE> company = this.companyRepository.findById(id);
         return company.isPresent() ? company.get() : null;
+    }
+
+    @Override
+    public CompanyDE getCompanyByCuit(Long cuit) {
+        return this.companyRepository.findByCuit(cuit);
     }
 
     private boolean isCompanyNull (CompanyDE companyDE){

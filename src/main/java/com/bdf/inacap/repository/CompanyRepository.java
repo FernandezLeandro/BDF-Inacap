@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<CompanyDE, Long> {
-    public CompanyDE findByCuit(String cuit);
+    public CompanyDE findByCuit(Long cuit);
 }
