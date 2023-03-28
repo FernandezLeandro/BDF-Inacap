@@ -23,7 +23,7 @@ public interface CompanyMapper {
 
     @Mapping(target = "name", source = "nameCompany")
     @Mapping(target = "cuit", source = "cuit")
-    CompanyDE boToDE();
+    CompanyDE boToDE(CompanyBO companyBO);
 
 
 }
