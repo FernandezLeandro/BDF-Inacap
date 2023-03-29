@@ -25,4 +25,11 @@ public class ControllerAdvice {
         ErrorDTO error = ErrorDTO.builder().message(e.getMessage()).code(CodeError.C400).build();
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = CompanyException.class)
+    public ResponseEntity companiesIsEmpty(CompanyException e) {
+        ErrorDTO error = ErrorDTO.builder().message(e.getMessage()).code(CodeError.C204).build();
+        //return new ResponseEntity<>(error, e.getStatus());
+        return ResponseEntity.status(e.getStatus()).body(error);
+    }
 }
