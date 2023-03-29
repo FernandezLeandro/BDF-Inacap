@@ -1,6 +1,7 @@
 package com.bdf.inacap.service.impl;
 
 import com.bdf.inacap.domain.entity.CompanyDE;
+import com.bdf.inacap.exception.BadRequestException;
 import com.bdf.inacap.repository.CompanyRepository;
 import com.bdf.inacap.service.interfaces.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,19 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyServiceImpl (CompanyRepository companyRepository){
         this.companyRepository = companyRepository;
     }
+
     @Override
     public List<CompanyDE> getAll() {
         return this.companyRepository.findAll().stream().filter(x -> x.getEstadoAlta()).collect(Collectors.toList());
     }
 
     @Override
-    public CompanyDE add(CompanyDE newCompany) {
-        return this.companyRepository.save(newCompany);
+    public CompanyDE add(CompanyDE newCompany){
+        if(newCompany.getName()!=null){
+            newCompany.setEstadoAlta(true);
+            return this.companyRepository.save(newCompany);
+        }
+        throw new BadRequestException("badrequest");
     }
 
     @Override
