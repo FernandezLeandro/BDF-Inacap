@@ -1,6 +1,7 @@
 package com.bdf.inacap.service;
 
 import com.bdf.inacap.domain.entity.CompanyDE;
+import com.bdf.inacap.exception.BadRequestException;
 import com.bdf.inacap.repository.CompanyRepository;
 import com.bdf.inacap.service.impl.CompanyServiceImpl;
 import org.jeasy.random.EasyRandom;
@@ -13,8 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,6 +58,26 @@ public class CompanyServiceTest {
         when(this.companyRepository.findAll()).thenReturn(Arrays.asList(company));
 
         assertEquals(this.companyService.getAll(),List.of(companiesEmpty));
+    }
+
+    @Test
+    public void saveCompany() {
+        when(this.companyRepository.save(this.company)).thenReturn(this.company);
+        assertNotNull(this.companyService.add(this.company));
+    }
+
+    @Test
+    public void saveCompanyNameNullException() {
+        this.company.name =null;
+        assertThrows(BadRequestException.class,()-> this.companyService.add(this.company));
+    }
+
+    @Test
+    public void shouldReturnDeleteCompany() {
+        this.company.estadoAlta= false;
+        when(this.companyRepository.findById(company.id)).thenReturn(Optional.ofNullable(this.company));
+        when(this.companyRepository.save(this.company)).thenReturn(this.company);
+        assertFalse(this.companyService.deleteByID(this.company.id).getEstadoAlta());
     }
 
 }
