@@ -14,6 +14,8 @@ public interface CompanyController {
 
     public ResponseEntity<List<CompanyDTO>> getAll ();
 
+    public ResponseEntity<CompanyDTO> getById(@PathVariable Long id);
+
     public ResponseEntity<CompanyDTO> getByCuit(@PathVariable Long cuit);
 
     public ResponseEntity<CompanyDTO> add (@RequestBody CompanyDTO companyDTO);
