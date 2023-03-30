@@ -2,6 +2,7 @@ package com.bdf.inacap.service;
 
 import com.bdf.inacap.domain.entity.CompanyDE;
 import com.bdf.inacap.exception.BadRequestException;
+import com.bdf.inacap.exception.CompanyException;
 import com.bdf.inacap.repository.CompanyRepository;
 import com.bdf.inacap.service.impl.CompanyServiceImpl;
 import org.jeasy.random.EasyRandom;
@@ -12,11 +13,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +33,7 @@ public class CompanyServiceTest {
 
     private CompanyDE company;
     private EasyRandom generator;
+    private List emptyCompanies;
 
     @BeforeEach
     public void setUp (){
@@ -56,11 +60,27 @@ public class CompanyServiceTest {
     @Test
     public void shouldFailToReturnAllCompanies() {
         this.company.estadoAlta= false;
-        CompanyDE [] companiesEmpty = {};
+        initEmptyCompanies();
 
         when(this.companyRepository.findAll()).thenReturn(Arrays.asList(company));
 
-        assertEquals(this.companyService.getAll(),List.of(companiesEmpty));
+        assertEquals(this.companyService.getAll(),this.emptyCompanies);
+    }
+
+    @Test
+    public void shouldReturnCompanyByCuit() {
+        when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(this.company);
+
+        assertEquals(this.companyService.getCompanyByCuit(this.company.getCuit()), this.company);
+    }
+
+    @Test
+    public void shouldFailCompanyException() {
+        initEmptyCompanies();
+
+        when(this.companyRepository.findAll()).thenReturn(this.emptyCompanies);
+
+        assertThrows(CompanyException.class, () -> this.companyService.getAll());
     }
 
     @Test
@@ -81,6 +101,10 @@ public class CompanyServiceTest {
         when(this.companyRepository.findById(company.id)).thenReturn(Optional.ofNullable(this.company));
         when(this.companyRepository.save(this.company)).thenReturn(this.company);
         assertFalse(this.companyService.deleteByID(this.company.id).getEstadoAlta());
+    }
+
+    private void initEmptyCompanies() {
+        this.emptyCompanies = new ArrayList<>();
     }
 
 }
