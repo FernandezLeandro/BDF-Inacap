@@ -1,5 +1,6 @@
 package com.bdf.inacap.rest.controller.company;
 
+import com.bdf.inacap.domain.entity.CompanyDE;
 import com.bdf.inacap.domain.mapper.CompanyMapper;
 import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import com.bdf.inacap.service.interfaces.CompanyService;
@@ -57,7 +58,10 @@ public class CompanyControllerImpl implements CompanyController{
     }
 
     @Override
+    @PatchMapping("/{id}")
     public ResponseEntity<CompanyDTO> updateByID(CompanyDTO companyDTO, Long id) {
-        return null;
+        return ResponseEntity.ok(
+                this.companyMapper.deToDTO(this.companyService.updateByID(
+                        this.companyMapper.dtoToDE(companyDTO),id)));
     }
 }

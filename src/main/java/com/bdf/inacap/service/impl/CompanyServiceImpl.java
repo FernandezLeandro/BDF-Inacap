@@ -54,7 +54,9 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDE updateByID(CompanyDE newCompany, Long id) {
-        return null;
+        CompanyDE companyToUpdate = this.getCompanyByID(id);
+        companyToUpdate.setContactName(newCompany.contactName);
+        return this.companyRepository.save(companyToUpdate);
     }
 
     private CompanyDE getCompanyByID(Long id) {
