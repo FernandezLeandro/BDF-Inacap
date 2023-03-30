@@ -72,9 +72,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     private List<CompanyDE> getCompaniesEnabled() {
-        log.info("Es: " + this.companyRepository.findAll().size());
         if(this.companyRepository.findAll().isEmpty()){
-            log.info("Vacio");
             throw new CompanyException(HttpStatus.NO_CONTENT, "Companies is empty", CodeError.C204);
         }
         return this.companyRepository.findAll().stream()

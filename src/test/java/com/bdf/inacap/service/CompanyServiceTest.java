@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -48,6 +49,8 @@ public class CompanyServiceTest {
         when(this.companyRepository.findAll()).thenReturn(Arrays.asList(company));
 
         assertEquals(this.companyService.getAll(), Arrays.asList(company));
+        assertNotNull(this.companyService.getAll());
+
     }
 
     @Test
