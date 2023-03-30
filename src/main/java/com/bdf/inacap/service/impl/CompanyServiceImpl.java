@@ -34,11 +34,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDE add(CompanyDE newCompany){
-        if(newCompany.getName()!=null){
-            newCompany.setEstadoAlta(true);
-            return this.companyRepository.save(newCompany);
+
+        this.companyRepository.findByCuit(newCompany.cuit).orElseThrow(
+                () -> new CompanyException(HttpStatus.BAD_REQUEST, "Company already exists", CodeError.C400));
+
+        if(newCompany.getName()==null || newCompany.getName()=="" ){
+            throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
         }
-        throw new BadRequestException("badrequest");
+        newCompany.setEstadoAlta(true);
+        return this.companyRepository.save(newCompany);
+
     }
 
     @Override
@@ -59,14 +64,15 @@ public class CompanyServiceImpl implements CompanyService {
         return this.companyRepository.save(companyToUpdate);
     }
 
-    private CompanyDE getCompanyByID(Long id) {
-        Optional<CompanyDE> company = this.companyRepository.findById(id);
-        return company.isPresent() ? company.get() : null;
+    public CompanyDE getCompanyByID(Long id) {
+        return this.companyRepository.findById(id).orElseThrow(
+                () -> new CompanyException(HttpStatus.NOT_FOUND, "Id doesn't find", CodeError.C404));
     }
 
     @Override
     public CompanyDE getCompanyByCuit(Long cuit) {
-        return this.companyRepository.findByCuit(cuit);
+        return this.companyRepository.findByCuit(cuit).orElseThrow(
+                () -> new CompanyException(HttpStatus.NOT_FOUND, "Cuit doesn't find", CodeError.C404));
     }
 
     private boolean isCompanyNull (CompanyDE companyDE){

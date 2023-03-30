@@ -15,5 +15,7 @@ public interface CompanyService {
 
     public CompanyDE updateByID (CompanyDE newCompany, Long id);
 
+    public CompanyDE getCompanyByID(Long id);
+
     public CompanyDE getCompanyByCuit(Long cuit);
 }

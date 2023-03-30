@@ -28,7 +28,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = CompanyException.class)
     public ResponseEntity companiesIsEmpty(CompanyException e) {
-        ErrorDTO error = ErrorDTO.builder().message(e.getMessage()).code(CodeError.C204).build();
+        ErrorDTO error = ErrorDTO.builder().message(e.getMessage()).code(e.getCodeError()).build();
         //return new ResponseEntity<>(error, e.getStatus());
         return ResponseEntity.status(e.getStatus()).body(error);
     }

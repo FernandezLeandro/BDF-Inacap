@@ -35,6 +35,14 @@ public class CompanyControllerImpl implements CompanyController{
     }
 
     @Override
+  // @GetMapping("{id}")
+    public ResponseEntity<CompanyDTO> getById(Long id) {
+        return ResponseEntity.ok(
+                this.companyMapper.deToDTO(
+                this.companyService.getCompanyByID(id)));
+    }
+
+    @Override
     @GetMapping("{cuit}")
     public ResponseEntity<CompanyDTO> getByCuit(Long cuit) {
         return ResponseEntity.ok(this.companyMapper.deToDTO(this.companyService.getCompanyByCuit(cuit)));
