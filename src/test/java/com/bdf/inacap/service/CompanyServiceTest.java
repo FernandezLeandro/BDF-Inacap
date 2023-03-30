@@ -69,7 +69,7 @@ public class CompanyServiceTest {
 
     @Test
     public void shouldReturnCompanyByCuit() {
-        when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(this.company);
+        when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(Optional.ofNullable(this.company));
 
         assertEquals(this.companyService.getCompanyByCuit(this.company.getCuit()), this.company);
     }
@@ -92,7 +92,7 @@ public class CompanyServiceTest {
     @Test
     public void saveCompanyNameNullException() {
         this.company.name =null;
-        assertThrows(BadRequestException.class,()-> this.companyService.add(this.company));
+        assertThrows(CompanyException.class,()-> this.companyService.add(this.company));
     }
 
     @Test

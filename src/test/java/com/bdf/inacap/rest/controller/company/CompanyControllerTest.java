@@ -31,16 +31,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(MockitoExtension.class)
 @Slf4j
 public class CompanyControllerTest {
-    @Mock
-    private CompanyRepository companyRepository;
-    @Autowired
+
     MockMvc mockMvc;
 
     private EasyRandom generator;
     private CompanyDE company;
-    @InjectMocks
+
+    @Mock
     private CompanyServiceImpl companyService;
-    @Autowired
+    @Mock
     private CompanyMapper companyMapper;
 
     @BeforeEach
