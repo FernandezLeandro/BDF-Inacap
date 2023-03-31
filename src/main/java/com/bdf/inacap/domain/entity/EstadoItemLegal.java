@@ -9,7 +9,7 @@ import lombok.Data;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class EstadoItemLegal extends Auditable{
+public class EstadoItemLegal{
     //Id no lo tenia, por eso el suppressWarnings?
     @Id
     Long id;

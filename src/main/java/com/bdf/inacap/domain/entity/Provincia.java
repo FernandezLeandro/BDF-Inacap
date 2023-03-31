@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Provincia extends Auditable {
+public class Provincia {
     @Basic
     @Column(unique = true, nullable = false, length = 50,name="nombre")
     private String nombre;

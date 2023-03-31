@@ -8,7 +8,7 @@ import java.util.Calendar;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class HistoriaLegal  extends Auditable {
+public class HistoriaLegal {
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

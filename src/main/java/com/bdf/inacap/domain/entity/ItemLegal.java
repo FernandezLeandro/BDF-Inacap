@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemLegal extends Auditable {
+public class ItemLegal{
 
     @ManyToOne
     @JoinColumn(name = "evento_id")

@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails;
 @Entity
 @Table(name="Usuario")
 @Data
-public class Usuario extends Auditable implements UserDetails{
+public class Usuario implements UserDetails{
 
     @Column( unique = true, nullable = false, name="login")
     private String login;

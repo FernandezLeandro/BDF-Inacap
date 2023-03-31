@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="Parametro")
 @Data
-public class Parametro extends Auditable{
+public class Parametro {
     @Column(nullable = false,length = 60)
     private String clave;
 

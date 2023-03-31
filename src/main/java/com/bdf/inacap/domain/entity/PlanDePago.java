@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Table(name="PlanDePago")
 @Data
-public class PlanDePago extends Auditable {
+public class PlanDePago{
 
     @ManyToOne
     private Acta acta;

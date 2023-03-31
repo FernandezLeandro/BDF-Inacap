@@ -9,7 +9,7 @@ import java.util.Set;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class TipoItemLegal extends Auditable {
+public class TipoItemLegal {
 
     @Basic
     @Column(nullable=false)

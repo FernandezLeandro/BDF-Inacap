@@ -12,7 +12,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class Periodo extends Auditable{
+public class Periodo {
     @Basic
     @Column(nullable = false, length = 7,name="periodo")
     private String periodo;

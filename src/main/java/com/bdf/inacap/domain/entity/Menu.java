@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Data
-public class Menu extends Auditable implements Comparable {
+public class Menu implements Comparable {
 
     @Basic
     @Column( unique = true, nullable = false)
