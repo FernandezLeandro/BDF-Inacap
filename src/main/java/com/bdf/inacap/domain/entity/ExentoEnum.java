@@ -1,5 +1,6 @@
 package com.bdf.inacap.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@AllArgsConstructor
 public enum ExentoEnum {
     NO("NO",true,false), CAME ("SI (CAME)", false,true), FAECYS("SI (FAECYS)",false,true), BAJA("SI (BAJA)", false,true),
     CAC("SI (CAC)",false,true), EMPLEADOS0("SI (EMPLEADOS 0)",true,true), AFIP("SI (AFIP)", false, true), CONCURSO("SI (CONCURSO)",true,true);
@@ -20,12 +22,6 @@ public enum ExentoEnum {
     //Si es un estado de tipo eximición.
     //Se utiliza en algunos lados para ver si mostrar la fechaExento.
     private Boolean exento;
-
-    ExentoEnum(String mensaje, Boolean aportante, Boolean exento){
-        this.aportante = aportante;
-        this.mensaje = mensaje;
-        this.exento = exento;
-    }
 
     public String getName(){
         return name();

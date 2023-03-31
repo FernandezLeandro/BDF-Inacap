@@ -1,17 +1,14 @@
 package com.bdf.inacap.domain.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum EstadoPlanDeDeuda {
     PENDIENTE_APROBACION("Pendiente de Aprobación"), APROBADO("Aprobado"), RECHAZADO("Rechazado"), ARCHIVADO("Archivado"), VENCIDO("Vencido"), PAGADO("Pagado");
 
     private String leyenda;
-
-    private EstadoPlanDeDeuda(String leyenda) {
-        this.leyenda = leyenda;
-    }
-
-    public String getLeyenda(){
-        return this.leyenda;
-    }
 
     //Devuelve acorde a la leyenda, el enum? Es decir si la leyenda es "Pendiente de Aprobacion" devuelve PENDIENTE_APROBACION?
     public static EstadoPlanDeDeuda getEstadoPlan(String leyenda){
