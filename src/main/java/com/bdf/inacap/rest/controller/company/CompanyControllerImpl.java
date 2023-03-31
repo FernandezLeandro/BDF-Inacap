@@ -35,7 +35,7 @@ public class CompanyControllerImpl implements CompanyController{
     }
 
     @Override
-  // @GetMapping("{id}")
+    @GetMapping("{id}")
     public ResponseEntity<CompanyDTO> getById(Long id) {
         return ResponseEntity.ok(
                 this.companyMapper.deToDTO(
@@ -43,7 +43,7 @@ public class CompanyControllerImpl implements CompanyController{
     }
 
     @Override
-    @GetMapping("{cuit}")
+    @GetMapping("/cuit/{cuit}")
     public ResponseEntity<CompanyDTO> getByCuit(Long cuit) {
         return ResponseEntity.ok(this.companyMapper.deToDTO(this.companyService.getCompanyByCuit(cuit)));
     }

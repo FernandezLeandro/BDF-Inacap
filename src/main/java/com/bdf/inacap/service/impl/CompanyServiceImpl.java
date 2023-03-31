@@ -35,8 +35,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDE add(CompanyDE newCompany){
 
-        this.companyRepository.findByCuit(newCompany.cuit).orElseThrow(
-                () -> new CompanyException(HttpStatus.BAD_REQUEST, "Company already exists", CodeError.C400));
+        //this.companyRepository.findByCuit(newCompany.cuit).orElseThrow(
+        //        () -> new CompanyException(HttpStatus.BAD_REQUEST, "Company already exists", CodeError.C400));
 
         if(newCompany.getName()==null || newCompany.getName()=="" ){
             throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
