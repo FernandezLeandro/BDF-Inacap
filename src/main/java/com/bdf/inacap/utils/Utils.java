@@ -28,7 +28,8 @@ public class Utils {
 
     }
 
-    public static void exportToExcelOrPdf(ModelMap model,String tipoExt,Map parameters,
+	//TODO: desconmentar si se precisan los metodos
+   /* public static void exportToExcelOrPdf(ModelMap model,String tipoExt,Map parameters,
                                    JRBeanCollectionDataSource beanColDataSource,String nombreArchivo)
             throws FileNotFoundException, JRException, IOException {
         String generatedFileName = "";
@@ -204,5 +205,5 @@ public class Utils {
 		interes *= valorBasico;
 		return interes;
 	}
-	
+	*/
 }

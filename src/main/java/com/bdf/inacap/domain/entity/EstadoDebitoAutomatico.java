@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum EstadoDebitoAutomatico {
+
     PENDIENTE("Pendiente") {
         @Override
         public boolean validateFechaAcreditacion() {
@@ -26,10 +27,22 @@ public enum EstadoDebitoAutomatico {
 
     PAGADO("Pagado");
 
-    private String	descripcion;
+    private String descripcion;
 
     private EstadoDebitoAutomatico(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Integer getOrdinal() {
+        return ordinal();
+    }
+
+    public String getName() {
+        return name();
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
 
