@@ -9,9 +9,8 @@ import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@SuppressWarnings("serial")
+
 @Entity
-@Table(name = "Acta")
 @Data
 public class Acta {
 
@@ -100,6 +99,7 @@ public class Acta {
     @Column(nullable=false)
     private Long secuencia;
 
+    //TODO: verificar si es necesario
     public Acta(){
 		super();
 		this.secuencia = 0L;

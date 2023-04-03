@@ -3,7 +3,7 @@ package com.bdf.inacap.domain.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
+
 @Getter
 public enum AdeudaEnum {
         TODOS(1,"Todos"),

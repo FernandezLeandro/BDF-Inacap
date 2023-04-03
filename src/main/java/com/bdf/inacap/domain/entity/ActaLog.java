@@ -1,24 +1,18 @@
 package com.bdf.inacap.domain.entity;
 
-/**
- * Created by FPantano on 20/07/2016.
- */
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
 
 @Entity
 @Data
-@SuppressWarnings("serial")
 public class ActaLog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Basic
