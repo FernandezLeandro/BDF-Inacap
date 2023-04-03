@@ -5,13 +5,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @SuppressWarnings("serial")
 @Entity

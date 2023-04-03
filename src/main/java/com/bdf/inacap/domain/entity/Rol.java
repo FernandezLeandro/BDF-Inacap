@@ -12,7 +12,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinTable;
 import lombok.Data;
-import org.springframework.data.domain.Auditable;
 
 import java.util.List;
 

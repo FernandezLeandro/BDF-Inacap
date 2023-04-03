@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Periodo extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
