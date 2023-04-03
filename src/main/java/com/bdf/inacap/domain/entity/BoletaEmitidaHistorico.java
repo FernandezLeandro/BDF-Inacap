@@ -1,6 +1,8 @@
 package com.bdf.inacap.domain.entity;
 
 
+import com.bdf.inacap.log.ArchivoCargado;
+import com.bdf.inacap.utils.DateUtil;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,10 +10,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-@SuppressWarnings("serial")
 @Data
 @Entity
 public class BoletaEmitidaHistorico{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable=false)
     private Calendar fechaTransaccion;

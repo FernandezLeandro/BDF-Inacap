@@ -1,18 +1,23 @@
 package com.bdf.inacap.domain.entity;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import jakarta.persistence.Table;
+import com.bdf.inacap.utils.FormateadorDeFechas;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 
 @Entity
 @Data
 public class Acta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Empresa empresa;
@@ -68,7 +73,7 @@ public class Acta {
     @Transient
     private String cuotaHasta;
 
-    @OneToMany(mappedBy="acta")
+    @OneToMany(mappedBy = "acta")
     List<PlanDePago> planes;
 
 //    @OneToMany(mappedBy="acta")
@@ -88,71 +93,71 @@ public class Acta {
     private Usuario actaCierre;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Boolean borrado;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Boolean tieneInteresFinanciacion;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Long secuencia;
 
     //TODO: verificar si es necesario
-    public Acta(){
-		super();
-		this.secuencia = 0L;
-		this.contacto_apellido = "";
-		this.contacto_nombre = "";
-		this.contacto_mail = "";
-		this.contacto_telefono = "";
-		this.planes = new ArrayList<PlanDePago>();
-		this.modificaciones = new ArrayList<ModificacionActa>();
-		this.observacionAprobador = "";
-		this.observaciones = "";
-		this.borrado = false;
-		this.tieneInteresFinanciacion = true;
+    public Acta() {
+        super();
+        this.secuencia = 0L;
+        this.contacto_apellido = "";
+        this.contacto_nombre = "";
+        this.contacto_mail = "";
+        this.contacto_telefono = "";
+        this.planes = new ArrayList<PlanDePago>();
+        this.modificaciones = new ArrayList<ModificacionActa>();
+        this.observacionAprobador = "";
+        this.observaciones = "";
+        this.borrado = false;
+        this.tieneInteresFinanciacion = true;
     }
 
-    @OneToMany(mappedBy="acta")
+    @OneToMany(mappedBy = "acta")
     @Fetch(FetchMode.SUBSELECT)
     List<ModificacionActa> modificaciones;
 
     @Transient
     private boolean fueEditada;
 
-    public String getFechaAltaString(){
+    public String getFechaAltaString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(this.fechaAlta!=null){
+        if (this.fechaAlta != null) {
             return sdf.format(this.fechaAlta);
         }
         return "";
     }
 
-    public String getFechaCierreString(){
+    public String getFechaCierreString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        if(this.fechaCierre!=null){
+        if (this.fechaCierre != null) {
             return sdf.format(this.fechaCierre);
         }
         return "";
     }
 
 
-    public String getFechaAprobacionString(String language){
+    public String getFechaAprobacionString(String language) {
         DateFormat sdf = FormateadorDeFechas.getDateFormater(language);
-        if(this.fechaAprobacion!=null){
+        if (this.fechaAprobacion != null) {
             return sdf.format(this.fechaAprobacion);
         }
         return "";
     }
 
-    public String getFechaAprobacionString(){
-    	DateFormat sdf = FormateadorDeFechas.getDateFormater("");
-    	if(this.fechaAprobacion!=null){
-    		return sdf.format(this.fechaAprobacion);
-    	}
-    	return "";
+    public String getFechaAprobacionString() {
+        DateFormat sdf = FormateadorDeFechas.getDateFormater("");
+        if (this.fechaAprobacion != null) {
+            return sdf.format(this.fechaAprobacion);
+        }
+        return "";
     }
 
 
@@ -163,7 +168,7 @@ public class Acta {
         cal.set(2020, 1, 1);
         menor.setVencimiento(cal);
 
-        for (Iterator iterator = this.getPlanes().iterator(); iterator.hasNext();) {
+        for (Iterator iterator = this.getPlanes().iterator(); iterator.hasNext(); ) {
             PlanDePago type = (PlanDePago) iterator.next();
             if (type.getPeriodo().getVencimiento().before(menor.getVencimiento()))
                 menor = type.getPeriodo();
@@ -177,7 +182,7 @@ public class Acta {
         Calendar cal = Calendar.getInstance();
         cal.set(2000, 1, 1);
         mayor.setVencimiento(cal);
-        for (Iterator iterator = this.getPlanes().iterator(); iterator.hasNext();) {
+        for (Iterator iterator = this.getPlanes().iterator(); iterator.hasNext(); ) {
             PlanDePago type = (PlanDePago) iterator.next();
             if (type.getPeriodo().getVencimiento().after(mayor.getVencimiento()))
                 mayor = type.getPeriodo();
@@ -186,9 +191,9 @@ public class Acta {
     }
 
     public void logCambio(ModificacionActa cambio) {
-		if(getModificaciones() == null)
-			setModificaciones(new ArrayList<ModificacionActa>());
-		modificaciones.add(cambio);
-	}
+        if (getModificaciones() == null)
+            setModificaciones(new ArrayList<ModificacionActa>());
+        modificaciones.add(cambio);
+    }
 
 }

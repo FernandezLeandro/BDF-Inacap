@@ -1,100 +1,97 @@
 package com.bdf.inacap.domain.entity;
 
+import com.bdf.inacap.utils.DateUtil;
+import com.bdf.inacap.utils.Utils;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
-@SuppressWarnings("serial")
 @Data
-@Entity
-@Table(name="BoletaEmitida")
-public class BoletaEmitida{
+@Entity(name = "BoletaEmitida")
+public class BoletaEmitida {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Transient
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-    @Column(nullable = false,name="cantidadEmpleados")
+    @Column(nullable = false, name = "cantidadEmpleados")
     private Long cantidadEmpleados;
 
-    @Column(nullable = true, length = 48,name="codigoBarras")
+    @Column(nullable = true, length = 48, name = "codigoBarras")
     private String codigoBarras;
 
-    @Column(nullable = false,length = 20,name="cuit")
+    @Column(nullable = false, length = 20, name = "cuit")
     private String cuit;
 
     @Enumerated
-    @Column(nullable = false,name="estado")
+    @Column(nullable = false, name = "estado")
     private EstadoEnum estado;
 
     @Enumerated
-    @Column(nullable = false,name="origen")
-    private OrigenEnum origen;
+    @Column(nullable = false, name = "origen")
+    private Origen origen;
 
     @ManyToOne
-    @JoinColumn(name="periodo_id",nullable = false)
+    @JoinColumn(name = "periodo_id", nullable = false)
     private Periodo periodoId;
 
     @ManyToOne
-    @JoinColumn(name="empresa_id", nullable = false)
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable=false,name="fechaTransaccion")
+    @Column(nullable = false, name = "fechaTransaccion")
     private Calendar fechaTransaccion;
 
-    @Column(nullable = false,name="intereses1erPago")
+    @Column(nullable = false, name = "intereses1erPago")
     private Double intereses1erPago = 0D;
 
-    @Column(name="intereses2doPago")
+    @Column(name = "intereses2doPago")
     private Double intereses2doPago = 0D;
 
     @Embedded
     private Domicilio domicilio;
 
-    @Column(name="periodo")
+    @Column(name = "periodo")
     private String periodo;
 
-    @Column(nullable = false, name="habilitadoEmision")
+    @Column(nullable = false, name = "habilitadoEmision")
     private Boolean habilitadoEmision;
 
-    @Column(name="vencimiento")
+    @Column(name = "vencimiento")
     private Date vencimiento;
 
-    @Column(name="secuencia")
+    @Column(name = "secuencia")
     private Long secuencia;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable=true,name="fechaPagoReal")
+    @Column(nullable = true, name = "fechaPagoReal")
     private Calendar fechaPagoReal;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable=false,name="primerPago")
+    @Column(nullable = false, name = "primerPago")
     private Calendar primerPago;
 
-    @Column(nullable = false, length= 100,name="razonSocial")
+    @Column(nullable = false, length = 100, name = "razonSocial")
     private String razonSocial;
 
-    @Column(nullable = false, name="tipo")
+    @Column(nullable = false, name = "tipo")
     private Long tipo;
 
-    @Column(nullable = false,name="valorBasico")
+    @Column(nullable = false, name = "valorBasico")
     private Double valorBasico;
 
     @Basic
     @Column(nullable = false)
     private Long cheque = 0L;
-
-    public Long getCheque() {
-        return cheque;
-    }
-
-    public void setCheque(Long cheque) {
-        this.cheque = cheque;
-    }
 
     @Transient
     private List<CotizacionEmpleado> cotizacionesEmpleados;
@@ -120,8 +117,8 @@ public class BoletaEmitida{
     }
 
     protected void cotizarBasico() {
-        if (valorBasico==null){
-            valorBasico=0d;
+        if (valorBasico == null) {
+            valorBasico = 0d;
         }
         for (CotizacionEmpleado cotizacionEmpleado : this.cotizacionesEmpleados) {
             this.valorBasico += cotizacionEmpleado.cotizacion(this.cantidadEmpleados);
@@ -129,8 +126,8 @@ public class BoletaEmitida{
     }
 
     protected void cotizar1erPago() {
-        if (intereses1erPago==null){
-            intereses1erPago=0d;
+        if (intereses1erPago == null) {
+            intereses1erPago = 0d;
         }
         for (CotizacionInteres cotizacion : cotizacionesIntereses) {
             this.intereses1erPago += cotizacion.cotizar(this.primerPago, this.periodoId.getVencimiento());
@@ -138,36 +135,36 @@ public class BoletaEmitida{
         this.intereses1erPago *= this.valorBasico;
     }
 
-    public String getPrimerPagoString(){
+    public String getPrimerPagoString() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(getPrimerPago().getTime());
     }
 
 
-    public String getFechaEmision(){
-        if (getFechaTransaccion()!=null)
+    public String getFechaEmision() {
+        if (getFechaTransaccion() != null)
             return sdf.format(new Date(getFechaTransaccion().getTimeInMillis()));
         else
             return "";
     }
 
-    public String getFechaPagoRealString(){
-        if (getFechaPagoReal()!=null)
+    public String getFechaPagoRealString() {
+        if (getFechaPagoReal() != null)
             return sdf.format(new Date(getFechaPagoReal().getTimeInMillis()));
         else
             return "";
     }
 
-    public String getMontoBasico(){
+    public String getMontoBasico() {
         return Utils.completarDosDecimales(getValorBasico());
     }
 
-    public String getMontoIntereses(){
+    public String getMontoIntereses() {
         return Utils.completarDosDecimales(getIntereses1erPago());
     }
 
 
-    public String getMonto(){
+    public String getMonto() {
         Double total = getValorBasico() + getIntereses1erPago();
         total = total * 100;
         // Round to the nearest integer.
@@ -188,7 +185,7 @@ public class BoletaEmitida{
         return DateUtil.getFechaAsString(this.fechaPagoReal, "es");
     }
 
-    public void setPeriodoColumns(Periodo periodo){
+    public void setPeriodoColumns(Periodo periodo) {
         this.setHabilitadoEmision(periodo.getHabilitadoEmision());
         this.setVencimiento(periodo.getVencimiento().getTime());
         this.setPeriodo(periodo.getPeriodo());

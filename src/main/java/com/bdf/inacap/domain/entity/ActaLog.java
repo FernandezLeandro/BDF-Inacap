@@ -77,16 +77,15 @@ public class ActaLog {
     private Usuario actaCierre;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Boolean borrado;
 
     @Column(nullable = false, length = 50)
     private String usuarioUltimaModif;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Calendar fechaUltimaModif;
-
 
 
 }
