@@ -1,27 +1,31 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="Parametro")
 @Data
-public class Parametro {
-    @Column(nullable = false,length = 60)
+public class Parametro extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 60)
     private String clave;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = false, length = 200)
     private String valor;
 
-    @Column(nullable = false,length = 20)
+    @Column(nullable = false, length = 20)
     private String user;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Timestamp lastUpdate;
-
 }
 

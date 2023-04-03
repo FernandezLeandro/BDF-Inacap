@@ -1,6 +1,14 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
@@ -8,31 +16,34 @@ import java.util.Calendar;
 import java.util.List;
 
 
-
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class Periodo {
+public class Periodo extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Basic
-    @Column(nullable = false, length = 7,name="periodo")
+    @Column(nullable = false, length = 7, name = "periodo")
     private String periodo;
 
-    @Column(nullable = false,name="vencimiento")
+    @Column(nullable = false, name = "vencimiento")
     @Temporal(TemporalType.DATE)
     private Calendar vencimiento;
 
     @Basic
-    @Column(nullable = false,name="habilitadoEmision")
+    @Column(nullable = false, name = "habilitadoEmision")
     private Boolean habilitadoEmision = true;
 
     public String getTextHabilitadoEmision() {
         String habilitado = "Sí";
-        if(habilitadoEmision == false){
-            habilitado= "No";
+        if (habilitadoEmision == false) {
+            habilitado = "No";
         }
         return habilitado;
     }
-    public String getFechaVencimientoString(){
+
+    public String getFechaVencimientoString() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(getVencimiento().getTime());
     }
@@ -47,23 +58,15 @@ public class Periodo {
         super();
         this.id = id;
     }
-
-    public Periodo() {
-        super();
-    }
-
-//	@Override
-//	public boolean equals(Object other) {
-//		return (this.periodo.equalsIgnoreCase(((Periodo) other).periodo));
-//	}
-
-    public static Periodo getById(Long id,List<Periodo> periodoList){
-        for(Periodo per : periodoList){
-            if(per.id.equals(id))
+    
+    public static Periodo getById(Long id, List<Periodo> periodoList) {
+        for (Periodo per : periodoList) {
+            if (per.id.equals(id))
                 return per;
         }
         return null;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -72,7 +75,7 @@ public class Periodo {
         return result;
     }
 
-    //	@Override
+    @Override
     public boolean equals(Object other) {
         if (other == null)
             return false;

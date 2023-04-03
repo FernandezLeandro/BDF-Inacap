@@ -1,6 +1,14 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
 
@@ -10,10 +18,12 @@ import java.util.List;
 import java.util.Locale;
 
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class ItemPlanLegal {
+public class ItemPlanLegal extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     PlanDeDeudaLegal plan;
@@ -39,20 +49,10 @@ public class ItemPlanLegal {
     @ManyToMany
     List<BoletaEmitida> boletasPagadas;
 
-    public void setPlan(PlanDeDeudaLegal plan) {
-        this.plan = plan;
-    }
-
-    public PlanDeDeudaLegal getPlan() {
-        return plan;
-    }
-
     public ItemPlanLegal() {
         this.setCantidadEmpleados(0L);
         this.setMonto(0.0);
         this.setIntereses(0.0);
-//        this.periodo = new Periodo();
-//        this.id = 0l;
     }
 
     public ItemPlanLegal(Periodo periodo, List<BoletaEmitida> boletas) {

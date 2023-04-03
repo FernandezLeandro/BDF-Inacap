@@ -1,14 +1,24 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Column;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 import java.util.Calendar;
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class HistoriaLegal {
+public class HistoriaLegal extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -22,4 +32,11 @@ public class HistoriaLegal {
 
     @ManyToOne
     Usuario usuario;
+
+    public HistoriaLegal(ItemLegal item, Usuario usuario) {
+        this.setItem(item);
+        this.setUsuario(usuario);
+        this.setFecha(Calendar.getInstance());
+        this.setEstadoItem(item.getEstado());
+    }
 }

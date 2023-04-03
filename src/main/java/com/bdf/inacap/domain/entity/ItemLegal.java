@@ -1,17 +1,22 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ItemLegal{
+public class ItemLegal extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "evento_id")

@@ -40,7 +40,8 @@ dependencies {
 	//EasyRandom
 	testImplementation 'org.jeasy:easy-random-core:5.0.0'
 
-
+	//ApacheCommonsLang
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 tasks.named('test') {

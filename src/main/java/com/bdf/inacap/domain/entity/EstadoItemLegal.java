@@ -1,17 +1,20 @@
 package com.bdf.inacap.domain.entity;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Data;
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class EstadoItemLegal{
-    //Id no lo tenia, por eso el suppressWarnings?
+public class EstadoItemLegal extends Auditable {
+    //TODO: Atributos deberian ser privados?
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Basic
     @Column(nullable = false, unique = true)

@@ -9,6 +9,7 @@ import lombok.Data;
 @Embeddable
 @Data
 public class PersonaResponsable {
+
     @Basic
     @Column(nullable = false, length = 100)
     private String nombre;

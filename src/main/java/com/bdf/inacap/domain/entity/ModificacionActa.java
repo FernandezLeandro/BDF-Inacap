@@ -1,20 +1,27 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name="ModificacionActa")
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class ModificacionActa extends Auditable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     private Acta acta;
 

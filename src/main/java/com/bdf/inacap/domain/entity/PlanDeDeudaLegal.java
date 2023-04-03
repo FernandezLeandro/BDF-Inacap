@@ -1,6 +1,21 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Basic;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.FetchType;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -9,10 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class PlanDeDeudaLegal {
+public class PlanDeDeudaLegal extends Auditable {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
     EventoLegal evento;
@@ -31,7 +48,7 @@ public class PlanDeDeudaLegal {
     @Column(nullable = false)
     TipoDePlanDeDeuda tipo;
 
-    @OneToMany(targetEntity=ItemPlanLegal.class, mappedBy="plan")
+    @OneToMany(mappedBy="plan")
     List<ItemPlanLegal> items;
 
     @Basic

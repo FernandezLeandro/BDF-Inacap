@@ -9,18 +9,18 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public enum Origen {
-    WEB(new Integer("0"),"Web"),
-    MANUAL (new Integer("1"), "Manual"),
-    RESTAURADO (new Integer("2"), "Restaurado"),
-    PLAN (new Integer("3"), "Plan"),
-    BATCH_AUMENTO (new Integer("4"), "Batch Aumento"),
-    LEGAL (new Integer("5"), "Legal"),
-    DEBITOAUTOMATICO (new Integer("6"), "Débito Automático");
+    //TODO: Habia dos diferentes versiones de Origen, verificar si esta bien, usa switch case
+    WEB(0, "Web"),
+    MANUAL(1, "Manual"),
+    RESTAURADO(2, "Restaurado"),
+    PLAN(3, "Plan"),
+    BATCH_AUMENTO(4, "Batch Aumento"),
+    LEGAL(5, "Legal"),
+    DEBITO_AUTOMATICO(6, "Débito Automático");
     private Integer id;
     private String descripcion;
 
-
-    public static Origen valueOf(Integer id){
+    public static Origen valueOf(Integer id) {
         switch (id.intValue()) {
             case 0:
                 return Origen.WEB;
@@ -35,27 +35,19 @@ public enum Origen {
             case 5:
                 return Origen.LEGAL;
             case 6:
-                return Origen.DEBITOAUTOMATICO;
+                return Origen.DEBITO_AUTOMATICO;
             default:
                 return null;
         }
     }
 
-    public static List<Origen> getOrigenesBoleta(){
-        List<Origen> origenes= new ArrayList<Origen>();
+    public static List<Origen> getOrigenesBoleta() {
+        List<Origen> origenes = new ArrayList<Origen>();
         origenes.add(Origen.MANUAL);
         origenes.add(Origen.WEB);
         origenes.add(Origen.BATCH_AUMENTO);
         origenes.add(Origen.PLAN);
-        origenes.add(Origen.DEBITOAUTOMATICO);
+        origenes.add(Origen.DEBITO_AUTOMATICO);
         return origenes;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

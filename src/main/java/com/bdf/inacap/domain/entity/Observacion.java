@@ -6,11 +6,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Observacion {
-    OBSERVADO("CON OBS."),NO_OBSERVADO("SIN OBS.");
+    OBSERVADO("CON OBS."), NO_OBSERVADO("SIN OBS.");
 
     private String descripcion;
 
-    public String getName(){
+    public String getName() {
         return name();
     }
 

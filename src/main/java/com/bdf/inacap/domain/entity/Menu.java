@@ -1,24 +1,28 @@
 package com.bdf.inacap.domain.entity;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import lombok.Data;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 
 @Entity
 @Data
-public class Menu implements Comparable {
+public class Menu extends Auditable implements Comparable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Basic
-    @Column( unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String nombre;
 
     @Basic
-    @Column(  nullable = false)
+    @Column(nullable = false)
     private String link;
 
     @Override

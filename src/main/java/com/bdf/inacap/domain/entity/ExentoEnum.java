@@ -1,9 +1,7 @@
 package com.bdf.inacap.domain.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +9,8 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public enum ExentoEnum {
-    NO("NO",true,false), CAME ("SI (CAME)", false,true), FAECYS("SI (FAECYS)",false,true), BAJA("SI (BAJA)", false,true),
-    CAC("SI (CAC)",false,true), EMPLEADOS0("SI (EMPLEADOS 0)",true,true), AFIP("SI (AFIP)", false, true), CONCURSO("SI (CONCURSO)",true,true);
+    NO("NO", true, false), CAME("SI (CAME)", false, true), FAECYS("SI (FAECYS)", false, true), BAJA("SI (BAJA)", false, true),
+    CAC("SI (CAC)", false, true), EMPLEADOS0("SI (EMPLEADOS 0)", true, true), AFIP("SI (AFIP)", false, true), CONCURSO("SI (CONCURSO)", true, true);
 
     //Mensaje que muestra en las aplicaciones.
     private String mensaje;
@@ -23,14 +21,15 @@ public enum ExentoEnum {
     //Se utiliza en algunos lados para ver si mostrar la fechaExento.
     private Boolean exento;
 
-    public String getName(){
+    public String getName() {
         return name();
     }
 
-    public Integer getOrdinal(){
+    public Integer getOrdinal() {
         return this.ordinal();
     }
 
+    //TODO: Se podra mejorar el switch/case?
     public static ExentoEnum valueOf(int valor) {
         switch (valor) {
             case 0:
@@ -54,14 +53,14 @@ public enum ExentoEnum {
         }
     }
 
-    public static boolean isAportante(ExentoEnum estado){
+    public static boolean isAportante(ExentoEnum estado) {
         return ExentoEnum.getAportantes().contains(estado);
     }
 
-    public static List<ExentoEnum> getAportantes(){
+    public static List<ExentoEnum> getAportantes() {
         List<ExentoEnum> resultado = new ArrayList<ExentoEnum>();
-        for (ExentoEnum  exento: ExentoEnum.values()) {
-            if(exento.getAportante()){
+        for (ExentoEnum exento : ExentoEnum.values()) {
+            if (exento.getAportante()) {
                 resultado.add(exento);
             }
         }
