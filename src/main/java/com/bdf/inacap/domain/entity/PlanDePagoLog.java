@@ -1,16 +1,18 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by FPantano on 20/07/2016.
- */
 @Entity
-@SuppressWarnings("serial")
 @Data
 public class PlanDePagoLog {
     @Id
@@ -62,14 +64,14 @@ public class PlanDePagoLog {
 
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Boolean borrado;
 
     @Column(nullable = false, length = 50)
     private String usuarioUltimaModif;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Calendar fechaUltimaModif;
 
 }

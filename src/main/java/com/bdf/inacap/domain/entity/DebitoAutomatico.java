@@ -33,7 +33,7 @@ public class DebitoAutomatico {
     private Date fechaAcreditacion;
 
     @ManyToOne
-    private Banco banco;
+    private Banco bancoDeposito;
 
     @Basic
     private String cbu;
@@ -82,7 +82,7 @@ public class DebitoAutomatico {
     }
 
     private void guardarEstadoAnterior(String userLogin, DebitoAutomaticoLog debitoAutomaticoLog) {
-        debitoAutomaticoLog.setBanco(getBanco());
+        debitoAutomaticoLog.setBanco(getBancoDeposito());
         debitoAutomaticoLog.setCbu(getCbu());
         debitoAutomaticoLog.setEstado(getEstado());
         debitoAutomaticoLog.setFechaAcreditacion(getFechaAcreditacion());

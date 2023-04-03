@@ -1,30 +1,28 @@
 package com.bdf.inacap.domain.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-
-@SuppressWarnings("serial")
 @Entity
 @Data
-@NoArgsConstructor
-public class Provincia {
-    @Basic
-    @Column(unique = true, nullable = false, length = 50,name="nombre")
-    private String nombre;
+@AllArgsConstructor
+public class Provincia extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Basic
+    @Column(unique = true, nullable = false, length = 50, name = "nombre")
+    private String nombre;
 
     public Provincia(Long id) {
         super();
         this.id = id;
-    }
-
-    public Provincia(Long id, String nombre) {
-        super();
-        this.id = id;
-        this.nombre = nombre;
     }
 }

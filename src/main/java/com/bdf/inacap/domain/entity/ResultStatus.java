@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class ResultStatus {
 
-    public static String ERROR="error";
-    public static String SUCCESS="success";
+    public static String ERROR = "error";
+    public static String SUCCESS = "success";
     private String status;
     private boolean hasToBeReaded = false;
     private String message;

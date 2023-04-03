@@ -1,6 +1,15 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Column;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Transient;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
@@ -9,11 +18,12 @@ import java.util.Date;
 import java.util.List;
 
 
-@SuppressWarnings("serial")
 @Entity
-@Table(name="PlanDePago")
 @Data
-public class PlanDePago{
+public class PlanDePago extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private Acta acta;
@@ -74,7 +84,7 @@ public class PlanDePago{
 
     public BoletaEmitida generarBoleta(Long sec, List<CotizacionEmpleado> cotizacionesEmpleados) {
         BoletaEmitida boleta = new BoletaEmitida();
-        Long empleados = new Long(this.empleadosAuditado - this.empleadosAbonado);
+        Long empleados = (long) (this.empleadosAuditado - this.empleadosAbonado);
         boleta.setPeriodoColumns(this.getPeriodo());
         boleta.setEmpresa(this.getActa().getEmpresa()); //agregado el 27/01/2016 porque sino rompia en la base si quedaba en null
         this.setEmpresa(boleta, this.getActa().getEmpresa());
@@ -87,16 +97,16 @@ public class PlanDePago{
         fPrimerPago.setTime(this.getFechaCalcIntereses());
         boleta.setPrimerPago(fPrimerPago);
         boleta.setFechaTransaccion(Calendar.getInstance());
-        boleta.setOrigen(OrigenEnum.PLAN);
+        boleta.setOrigen(Origen.PLAN);
         Double valorBasico = 0.0;
         for (CotizacionEmpleado cotizacionEmpleado : cotizacionesEmpleados) {
             valorBasico += cotizacionEmpleado.cotizacionNegativa(empleados);
         }
         boleta.setValorBasico(valorBasico);
-        boleta.setIntereses1erPago(new Double(this.getIntereses()));
+        boleta.setIntereses1erPago(this.getIntereses());
         boleta.setCheque(9982L); // 1L
         boleta.setTipo(6L);
-        if(tieneCheque()){
+        if (tieneCheque()) {
             boleta.setEstado(EstadoEnum.PAGADA);
         } else {
             boleta.setEstado(EstadoEnum.EN_DEBITO);
@@ -113,7 +123,7 @@ public class PlanDePago{
     public Double getImporte() {
         if (getCheque() != null)
             return getCheque().getImporte();
-        else if(getDebitoAutomatico()!=null)
+        else if (getDebitoAutomatico() != null)
             return getDebitoAutomatico().getImporte();
         else
             return 0d;
@@ -126,7 +136,7 @@ public class PlanDePago{
     public String getBancoDeposito() {
         if (getCheque() != null)
             return getCheque().getBancoDeposito().getNombre();
-        else if(getDebitoAutomatico()!=null && getDebitoAutomatico().getBancoDeposito()!=null)
+        else if (getDebitoAutomatico() != null && getDebitoAutomatico().getBancoDeposito() != null)
             return getDebitoAutomatico().getBancoDeposito().getNombre();
         else
             return "";
@@ -136,13 +146,13 @@ public class PlanDePago{
         if (getCheque() != null)
 //        	if (tieneCheque())
             return getCheque().getNroCheque();
-        else if(getDebitoAutomatico()!=null)
+        else if (getDebitoAutomatico() != null)
             return getDebitoAutomatico().getCbu();
         else
             return "";
     }
 
-    public String getFechaAcreditacionFormateada(){
+    public String getFechaAcreditacionFormateada() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             return sdf.format(this.getFechaAcreditacion());
@@ -166,8 +176,8 @@ public class PlanDePago{
         return getDebitoAutomatico() != null;
     }
 
-    public String getNroChequeCortado(){
-        if(getNroChequeCbu().length() > 8){
+    public String getNroChequeCortado() {
+        if (getNroChequeCbu().length() > 8) {
             return getNroChequeCbu().substring(getNroChequeCbu().length() - 8);
         } else {
             return getNroChequeCbu();
@@ -177,7 +187,7 @@ public class PlanDePago{
     public void desasociarFormaDePagoAnterior() {
 
         if (tieneFormaDePago()) {
-            if(tieneCheque()) {
+            if (tieneCheque()) {
                 setCheque(null);
             }
             setDebitoAutomatico(null);

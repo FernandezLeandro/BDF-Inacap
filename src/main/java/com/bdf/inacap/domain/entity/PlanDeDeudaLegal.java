@@ -28,7 +28,7 @@ import java.util.Map;
 @Data
 public class PlanDeDeudaLegal extends Auditable {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -48,16 +48,16 @@ public class PlanDeDeudaLegal extends Auditable {
     @Column(nullable = false)
     TipoDePlanDeDeuda tipo;
 
-    @OneToMany(mappedBy="plan")
+    @OneToMany(mappedBy = "plan")
     List<ItemPlanLegal> items;
 
     @Basic
     String observaciones;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     Usuario fiscalizador;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     Usuario aprobador;
 
     @Transient
@@ -66,7 +66,7 @@ public class PlanDeDeudaLegal extends Auditable {
     @Embedded
     Contacto contacto;
 
-    public PlanDeDeudaLegal(EventoLegal evento, Map<Periodo,List<BoletaEmitida>> boletas){
+    public PlanDeDeudaLegal(EventoLegal evento, Map<Periodo, List<BoletaEmitida>> boletas) {
         this();
         this.setEvento(evento);
         List<ItemPlanLegal> items = new ArrayList<ItemPlanLegal>();
@@ -75,7 +75,7 @@ public class PlanDeDeudaLegal extends Auditable {
             for (BoletaEmitida boleta : boletas.get(periodo)) {
                 estaExento = estaExento || boleta.getEstado().equals(EstadoEnum.EMPLEADOS0);
             }
-            if(!estaExento)
+            if (!estaExento)
                 items.add(new ItemPlanLegal(periodo, boletas.get(periodo)));
         }
         this.setItems(items);

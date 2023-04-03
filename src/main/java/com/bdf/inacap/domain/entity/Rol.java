@@ -1,50 +1,55 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinTable;
 import lombok.Data;
+import org.springframework.data.domain.Auditable;
 
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class Rol {
+public class Rol extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Basic
     @Column(unique = true, nullable = false)
     private String nombre;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "roles_menues")
     private List<Menu> menues;
 
     @Basic
-    @Column(name="mirror")
+    @Column(name = "mirror")
     private boolean mirror;
 
     @Basic
-    @Column(name="produccion")
+    @Column(name = "produccion")
     private boolean produccion;
 
     @Basic
-    @Column(name="fiscal")
+    @Column(name = "fiscal")
     private boolean fiscal;
 
     @Basic
-    @Column(name="aprobador")
+    @Column(name = "aprobador")
     private boolean aprobador;
 
     @Basic
-    @Column(name="adminFiscal")
+    @Column(name = "adminFiscal")
     private boolean adminFiscal;
-
 }
 
