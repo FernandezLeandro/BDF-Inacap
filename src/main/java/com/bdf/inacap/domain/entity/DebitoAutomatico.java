@@ -10,12 +10,13 @@ import java.util.Date;
 import java.util.List;
 
 
-
-@SuppressWarnings("serial")
 @Data
-@Entity
-@Table(name="DebitoAutomatico")
+@Entity(name = "DebitoAutomatico")
 public class DebitoAutomatico {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public DebitoAutomatico() {
         super();
@@ -25,44 +26,44 @@ public class DebitoAutomatico {
         setContadorEnvios(0);
     }
 
-    private transient Date				fechaDePago;		// Solo para
+    private transient Date fechaDePago;        // Solo para
     // eliminar Débito
 
     @Temporal(TemporalType.DATE)
-    private Date						fechaAcreditacion;
+    private Date fechaAcreditacion;
 
     @ManyToOne
-    private Banco						banco;
+    private Banco banco;
 
     @Basic
-    private String						cbu;
+    private String cbu;
 
     // Fecha en la que el Banco informa que pudo cobrar
     @Temporal(TemporalType.DATE)
-    private Date						fechaRecepcion;
+    private Date fechaRecepcion;
 
     @Basic
-    private String						observaciones;
+    private String observaciones;
 
     @Basic
-    private Double						importe;
+    private Double importe;
 
     @Enumerated
     @Column(nullable = false)
-    private EstadoDebitoAutomatico		estado;
+    private EstadoDebitoAutomatico estado;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy="debitoAutomatico")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "debitoAutomatico")
     public List<DebitoAutomaticoLog> historial;
 
     @ManyToOne
-    private Acta						acta;
+    private Acta acta;
 
     @Basic
     @Column(nullable = false)
-    private Boolean						borrado;
+    private Boolean borrado;
 
     @Basic
-    private Integer						contadorEnvios;
+    private Integer contadorEnvios;
 
 //    @ManyToOne(fetch=FetchType.EAGER)
 //    private ArchivoCargado archivo;
@@ -81,7 +82,7 @@ public class DebitoAutomatico {
     }
 
     private void guardarEstadoAnterior(String userLogin, DebitoAutomaticoLog debitoAutomaticoLog) {
-        debitoAutomaticoLog.setBancoDeposito(getBancoDeposito());
+        debitoAutomaticoLog.setBanco(getBanco());
         debitoAutomaticoLog.setCbu(getCbu());
         debitoAutomaticoLog.setEstado(getEstado());
         debitoAutomaticoLog.setFechaAcreditacion(getFechaAcreditacion());
@@ -89,10 +90,6 @@ public class DebitoAutomatico {
         debitoAutomaticoLog.setFechaModificacion(new Date(System.currentTimeMillis()));
         debitoAutomaticoLog.setImporte(getImporte());
         debitoAutomaticoLog.setUsuario(userLogin);
-    }
-
-    public Banco getBancoDeposito() {
-        return banco;
     }
 
     public void updateEstadoAsString(String stringEstado) {
@@ -105,7 +102,7 @@ public class DebitoAutomatico {
     }
 
     public boolean fechaAcreditacionCorrecta(String fechaAcreditacion, Integer estadoValue) throws Exception {
-        if(EstadoDebitoAutomatico.values()[estadoValue].validateFechaAcreditacion()) {
+        if (EstadoDebitoAutomatico.values()[estadoValue].validateFechaAcreditacion()) {
             return validateFecha(fechaAcreditacion);
         }
         return true;
@@ -120,14 +117,14 @@ public class DebitoAutomatico {
         long diffDays = diff / (24 * 60 * 60 * 1000);
         return diffDays >= 0;
     }
-    
-    public String getFechaAcreditacionFormateada(){
-		if(this.fechaAcreditacion != null){
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			return sdf.format(this.fechaAcreditacion);
-		} else {
-			return "";
-		}
-	}
+
+    public String getFechaAcreditacionFormateada() {
+        if (this.fechaAcreditacion != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.format(this.fechaAcreditacion);
+        } else {
+            return "";
+        }
+    }
 
 }

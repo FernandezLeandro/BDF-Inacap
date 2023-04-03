@@ -2,108 +2,111 @@ package com.bdf.inacap.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
 @Data
-@Entity
-@Table(name = "ChequeEnCarteraLog")
-@SuppressWarnings("serial")
-public class ChequeEnCarteraLog{
+@Entity(name = "ChequeEnCarteraLog")
+@NoArgsConstructor
+public class ChequeEnCarteraLog {
 
-	@ManyToOne
-	@JoinColumn(name = "chequeEnCarteraId", nullable = false)
-	private ChequeEnCartera chequeEnCarteraId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	protected Date fecha;
+    @ManyToOne
+    @JoinColumn(name = "chequeEnCarteraId", nullable = false)
+    private ChequeEnCartera chequeEnCarteraId;
 
-	@Basic
-	protected String usuario;
+    @Temporal(TemporalType.TIMESTAMP)
+    protected Date fecha;
 
-	@OneToOne
-	private Cheque cheque;
+    @Basic
+    protected String usuario;
 
-	// Banco de origen del cheque.
-	@ManyToOne
-	private Cuenta bancoPago;
+    @OneToOne
+    private Cheque cheque;
 
-	// Banco donde se deposita el cheque.
-	@ManyToOne
-	private Banco bancoDeposito;
+    // Banco de origen del cheque.
+    @ManyToOne
+    private Cuenta bancoPago;
 
-	@Basic
-	private String nroCheque;
+    // Banco donde se deposita el cheque.
+    @ManyToOne
+    private Banco bancoDeposito;
 
-	// Fecha en la que el cheque es recibido en la cartera.
-	@Temporal(TemporalType.DATE)
-	private Date fechaRecepcion;
+    @Basic
+    private String nroCheque;
 
-	// Fecha en la que se emitió el cheque. Dato del cheque físico.
-	@Temporal(TemporalType.DATE)
-	private Date fechaEmision;
+    // Fecha en la que el cheque es recibido en la cartera.
+    @Temporal(TemporalType.DATE)
+    private Date fechaRecepcion;
 
-	// Fecha en la que se acredita el cheque. Dato del cheque físico.
-	@Temporal(TemporalType.DATE)
-	private Date fechaAcreditacion;
+    // Fecha en la que se emitió el cheque. Dato del cheque físico.
+    @Temporal(TemporalType.DATE)
+    private Date fechaEmision;
 
-	// Fecha en la que se depositó el cheque.
-	@Temporal(TemporalType.DATE)
-	private Date fechaDeposito;
+    // Fecha en la que se acredita el cheque. Dato del cheque físico.
+    @Temporal(TemporalType.DATE)
+    private Date fechaAcreditacion;
 
-	// Fecha en la que se confirmó como aceptado o rechazado el cheque.
-	@Temporal(TemporalType.DATE)
-	private Date fechaConfirmacion;
+    // Fecha en la que se depositó el cheque.
+    @Temporal(TemporalType.DATE)
+    private Date fechaDeposito;
 
-	@Enumerated
-	private EstadoCheque estado;
+    // Fecha en la que se confirmó como aceptado o rechazado el cheque.
+    @Temporal(TemporalType.DATE)
+    private Date fechaConfirmacion;
 
-	// Detalle el algún cambio.
-	@Basic
-	private String observaciones;
+    @Enumerated
+    private EstadoCheque estado;
 
-	// Estado con el que proviene del acta. Si hubo cambios o no.
-	@Basic
-	private Observacion estadoObservacion;
+    // Detalle el algún cambio.
+    @Basic
+    private String observaciones;
 
-	@Basic
-	private BigDecimal importe;
+    // Estado con el que proviene del acta. Si hubo cambios o no.
+    @Basic
+    private Observacion estadoObservacion;
 
-	// Empresa a la que corresponde el cheque.
-	@ManyToOne
-	private Empresa empresa;
+    @Basic
+    private BigDecimal importe;
 
-	// Cheque al que reemplaza.
-	@OneToOne
-	private ChequeEnCartera reemplazado;
+    // Empresa a la que corresponde el cheque.
+    @ManyToOne
+    private Empresa empresa;
 
-	@Basic
-	@Column(nullable = false)
-	private Boolean borrado;
+    // Cheque al que reemplaza.
+    @OneToOne
+    private ChequeEnCartera reemplazado;
 
-	 public ChequeEnCarteraLog(ChequeEnCartera chequeEnCartera, String login)
-	 {
-		 this.chequeEnCarteraId = chequeEnCartera;
-		 this.fecha = Calendar.getInstance().getTime();
-		 this.usuario = login;
-		 this.cheque = chequeEnCartera.getCheque();
-		 this.bancoDeposito = chequeEnCartera.getBancoDeposito();
-		 this.bancoPago = chequeEnCartera.getBancoPago();
-		 this.borrado = chequeEnCartera.getBorrado();
-		 this.empresa = chequeEnCartera.getEmpresa();
-		 this.estado = chequeEnCartera.getEstado();
-		 this.estadoObservacion = chequeEnCartera.getEstadoObservacion();
-		 this.fechaAcreditacion = chequeEnCartera.getFechaAcreditacion();
-		 this.fechaConfirmacion = chequeEnCartera.getFechaConfirmacion();
-		 this.fechaDeposito = chequeEnCartera.getFechaDeposito();
-		 this.fechaEmision = chequeEnCartera.getFechaEmision();
-		 this.fechaRecepcion = chequeEnCartera.getFechaRecepcion();
-		 this.importe = chequeEnCartera.getImporte();
-		 this.nroCheque = chequeEnCartera.getNroCheque();
-		 this.observaciones = chequeEnCartera.getObservaciones();
-		 this.reemplazado = chequeEnCartera.getReemplazado();
-	 }
+    @Basic
+    @Column(nullable = false)
+    private Boolean borrado;
+
+    public ChequeEnCarteraLog(ChequeEnCartera chequeEnCartera, String login) {
+        this.chequeEnCarteraId = chequeEnCartera;
+        this.fecha = Calendar.getInstance().getTime();
+        this.usuario = login;
+        this.cheque = chequeEnCartera.getCheque();
+        this.bancoDeposito = chequeEnCartera.getBancoDeposito();
+        this.bancoPago = chequeEnCartera.getBancoPago();
+        this.borrado = chequeEnCartera.getBorrado();
+        this.empresa = chequeEnCartera.getEmpresa();
+        this.estado = chequeEnCartera.getEstado();
+        this.estadoObservacion = chequeEnCartera.getEstadoObservacion();
+        this.fechaAcreditacion = chequeEnCartera.getFechaAcreditacion();
+        this.fechaConfirmacion = chequeEnCartera.getFechaConfirmacion();
+        this.fechaDeposito = chequeEnCartera.getFechaDeposito();
+        this.fechaEmision = chequeEnCartera.getFechaEmision();
+        this.fechaRecepcion = chequeEnCartera.getFechaRecepcion();
+        this.importe = chequeEnCartera.getImporte();
+        this.nroCheque = chequeEnCartera.getNroCheque();
+        this.observaciones = chequeEnCartera.getObservaciones();
+        this.reemplazado = chequeEnCartera.getReemplazado();
+    }
 
 }

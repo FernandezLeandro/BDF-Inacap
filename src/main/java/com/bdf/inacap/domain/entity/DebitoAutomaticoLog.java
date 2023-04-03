@@ -6,12 +6,13 @@ import lombok.Data;
 import java.util.Date;
 
 
-
-@SuppressWarnings("serial")
 @Data
-@Entity
-@Table(name="DebitoAutomaticoLog")
+@Entity(name = "DebitoAutomaticoLog")
 public class DebitoAutomaticoLog {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     private DebitoAutomatico debitoAutomatico;
@@ -34,7 +35,7 @@ public class DebitoAutomaticoLog {
     private Double importe;
 
     @Enumerated
-    @Column(nullable=false)
+    @Column(nullable = false)
     private EstadoDebitoAutomatico estado;
 
     @Temporal(TemporalType.DATE)

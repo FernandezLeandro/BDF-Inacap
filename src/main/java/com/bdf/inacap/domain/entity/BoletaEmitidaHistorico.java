@@ -12,23 +12,23 @@ import java.util.List;
 
 @Data
 @Entity
-public class BoletaEmitidaHistorico{
+public class BoletaEmitidaHistorico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Calendar fechaTransaccion;
 
-    @Column(name="periodo")
+    @Column(name = "periodo")
     private String periodo;
 
-    @Column(name="vencimiento")
+    @Column(name = "vencimiento")
     private Calendar vencimiento;
 
-    @Column(nullable = false, name="habilitadoEmision")
+    @Column(nullable = false, name = "habilitadoEmision")
     private Boolean habilitadoEmision;
 
     @Column(nullable = false)
@@ -45,10 +45,10 @@ public class BoletaEmitidaHistorico{
     @Column(nullable = false)
     private Long cantidadEmpleados;
 
-    @Column(nullable = false,length = 20)
+    @Column(nullable = false, length = 20)
     private String cuit;
 
-    @Column(nullable = false, length= 100)
+    @Column(nullable = false, length = 100)
     private String razonSocial;
 
     @Embedded
@@ -79,44 +79,44 @@ public class BoletaEmitidaHistorico{
 
     @Transient
     private int dias2doPgo;
-    
+
     @Column(nullable = false)
     private Long tipo;
 
     @Column(nullable = true, length = 50)
     private String entidadCobro;
-    
-    @ManyToOne(fetch=FetchType.EAGER)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private ArchivoCargado archivo;
-    
+
     @Basic
-    @Column(nullable=true)
+    @Column(nullable = true)
     private Calendar fechaPagoReal;
-    
+
     @Basic
     @Column(nullable = false)
     private Long cheque = 0L;
 
     @ManyToOne
-    @JoinColumn(name="periodo_id",nullable = false)
+    @JoinColumn(name = "periodo_id", nullable = false)
     private Periodo periodoId;
 
     @ManyToOne
-    @JoinColumn(name="empresa_id", nullable = false)
+    @JoinColumn(name = "empresa_id", nullable = false)
     private Empresa empresa;
 
 
-    @Column(nullable = true, name="transferidoA")
+    @Column(nullable = true, name = "transferidoA")
     private Long transferidoA;
 
-    
+
     public String getFechaPagoRealAsString() {
         return DateUtil.getFechaAsString(this.fechaPagoReal, "es");
     }
-    
+
     public BoletaEmitidaHistorico() {
         super();
-        this.periodoId=new Periodo();
+        this.periodoId = new Periodo();
         this.cotizacionesEmpleados = new ArrayList<CotizacionEmpleado>();
         this.cotizacionesIntereses = new ArrayList<CotizacionInteres>();
     }
@@ -178,10 +178,10 @@ public class BoletaEmitidaHistorico{
         clon.setEmpresa(this.getEmpresa());
 
         /*
-         * Faltan los seters y getters del segundo pago en caso de habilitarse. 
-         * 
+         * Faltan los seters y getters del segundo pago en caso de habilitarse.
+         *
          * */
-            
+
         return clon;
     }
 

@@ -6,11 +6,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Entity
-@Table(name="ChequeEnCartera")
-@SuppressWarnings("serial")
+@Entity(name="ChequeEnCartera")
 public class ChequeEnCartera {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@OneToOne
 	private Cheque cheque;
 

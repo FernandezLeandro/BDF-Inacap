@@ -6,11 +6,13 @@ import lombok.Data;
 import java.util.Calendar;
 
 
-
-@SuppressWarnings("serial")
 @Data
 @Entity
-public class EmpresaContador{
+public class EmpresaContador {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Empresa empresa;

@@ -1,14 +1,16 @@
 package com.bdf.inacap.domain.entity;
 
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.Data;
 
-@SuppressWarnings("serial")
 @Data
 @Embeddable
 public class Contacto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Basic
     String nombre;

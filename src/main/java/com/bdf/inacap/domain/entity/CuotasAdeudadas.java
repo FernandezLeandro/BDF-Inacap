@@ -7,18 +7,17 @@ import java.io.Serializable;
 
 
 @Data
-@Entity
+@Entity(name = "CuotasAdeudadas")
 @IdClass(CuotasAdeudadas.class)
-@Table(name="CuotasAdeudadas")
 public class CuotasAdeudadas implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn(name="idPeriodo")
+    @JoinColumn(name = "idPeriodo")
     private Periodo periodo;
 
     @Id
-    @Column(nullable = false,name="idEmpresa")
+    @Column(nullable = false, name = "idEmpresa")
     private Long idEmpresa;
 
 

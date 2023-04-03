@@ -1,39 +1,42 @@
 package com.bdf.inacap.domain.entity;
 
 
-
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
-@SuppressWarnings("serial")
+
 @Data
 @Entity
-@Table(name = "Contador")
 public class Contador implements UserDetails {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     //Empresa del contador logueada en la sesion
     @Transient
     private Empresa empresaLogueada;
 
     @Enumerated
-    @Column(nullable = false,name="tipo")
+    @Column(nullable = false, name = "tipo")
     private TipoContadorEnum tipo;
 
-    @Column(unique = true, nullable = false, length = 11,name="cuit")
+    @Column(unique = true, nullable = false, length = 11, name = "cuit")
     private String cuit;
 
-    @Column(nullable = false, length = 100,name="razonSocial")
+    @Column(nullable = false, length = 100, name = "razonSocial")
     private String razonSocial;
 
-    @Column(nullable = false, length = 8,name="clave")
+    @Column(nullable = false, length = 8, name = "clave")
     private String clave;
 
-    @Column(nullable = true, length = 20,name="nroTelefono")
+    @Column(nullable = true, length = 20, name = "nroTelefono")
     private String nroTelefono;
 
     @Embedded
@@ -42,20 +45,20 @@ public class Contador implements UserDetails {
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar fechaRegistro;
 
-    @Column(name="confirmado")
+    @Column(name = "confirmado")
     private Integer confirmado;//Para notificaciones o pedidos de actualización de datos.
 
     @Embedded
     private PersonaResponsable responsable;
 
-    @Column(name="mail")
+    @Column(name = "mail")
     private String mail;
 
     @Enumerated
     private ExentoEnum exento = ExentoEnum.NO;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="fechaExento")
+    @Column(name = "fechaExento")
     private Calendar fechaExento;
 
 
@@ -79,7 +82,7 @@ public class Contador implements UserDetails {
         return clon;
     }
 
-//Spring Security Configuration
+    //Spring Security Configuration
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 //        TipoUsuariosEnum rol = TipoUsuariosEnum.CONTADOR;
@@ -89,6 +92,30 @@ public class Contador implements UserDetails {
 //            authorities.add(new SimpleGrantedAuthority(rolEmpresa.name()));
 //        }
         return authorities;
+    }
+
+    public String getUsername() {
+        return cuit;
+    }
+
+    public String getPassword() {
+        return clave;
+    }
+
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    public boolean isEnabled() {
+        return true;
     }
 
 }

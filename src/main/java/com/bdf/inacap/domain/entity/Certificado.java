@@ -1,20 +1,23 @@
 package com.bdf.inacap.domain.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Calendar;
-import jakarta.persistence.*;
 
-@SuppressWarnings("serial")
+
 @Data
 @Entity
-@Table(name="Certificado")
 public class Certificado {
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     Acta acta;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     Usuario usuario;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -24,7 +27,7 @@ public class Certificado {
         fecha = Calendar.getInstance();
     }
 
-    public Certificado(Usuario usuario, Acta acta){
+    public Certificado(Usuario usuario, Acta acta) {
         this();
         this.usuario = usuario;
         this.acta = acta;

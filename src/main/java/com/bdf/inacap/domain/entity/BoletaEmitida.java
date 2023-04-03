@@ -99,13 +99,11 @@ public class BoletaEmitida {
     @Transient
     private List<CotizacionInteres> cotizacionesIntereses;
 
-    public void addAllCotizacionesEmpleados(
-            List<CotizacionEmpleado> cotizacionesEmpleados) {
+    public void addAllCotizacionesEmpleados(List<CotizacionEmpleado> cotizacionesEmpleados) {
         this.cotizacionesEmpleados = cotizacionesEmpleados;
     }
 
-    public void addAllCotizacionesIntereses(
-            List<CotizacionInteres> cotizacionesIntereses) {
+    public void addAllCotizacionesIntereses(List<CotizacionInteres> cotizacionesIntereses) {
         this.cotizacionesIntereses = cotizacionesIntereses;
     }
 
@@ -142,17 +140,13 @@ public class BoletaEmitida {
 
 
     public String getFechaEmision() {
-        if (getFechaTransaccion() != null)
-            return sdf.format(new Date(getFechaTransaccion().getTimeInMillis()));
-        else
-            return "";
+        if (getFechaTransaccion() != null) return sdf.format(new Date(getFechaTransaccion().getTimeInMillis()));
+        else return "";
     }
 
     public String getFechaPagoRealString() {
-        if (getFechaPagoReal() != null)
-            return sdf.format(new Date(getFechaPagoReal().getTimeInMillis()));
-        else
-            return "";
+        if (getFechaPagoReal() != null) return sdf.format(new Date(getFechaPagoReal().getTimeInMillis()));
+        else return "";
     }
 
     public String getMontoBasico() {
