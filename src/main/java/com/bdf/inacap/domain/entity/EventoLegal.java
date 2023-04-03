@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class EventoLegal extends Auditable {
+public class EventoLegal {
 
     @ManyToOne
     private Empresa empresa;

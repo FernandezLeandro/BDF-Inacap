@@ -13,7 +13,7 @@ import java.util.Locale;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class ItemPlanLegal extends Auditable {
+public class ItemPlanLegal {
 
     @ManyToOne
     PlanDeDeudaLegal plan;

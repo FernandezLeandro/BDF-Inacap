@@ -16,7 +16,7 @@ import javax.persistence.ManyToMany;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class Rol extends Auditable {
+public class Rol {
 
     @Basic
     @Column(unique = true, nullable = false)

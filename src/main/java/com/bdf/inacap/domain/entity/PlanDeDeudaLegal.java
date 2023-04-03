@@ -12,7 +12,7 @@ import java.util.Map;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class PlanDeDeudaLegal extends Auditable{
+public class PlanDeDeudaLegal {
 
     @OneToOne
     EventoLegal evento;

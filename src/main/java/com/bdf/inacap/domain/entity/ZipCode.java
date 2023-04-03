@@ -11,7 +11,7 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Entity
 @Data
-public class ZipCode extends Auditable{
+public class ZipCode{
 
     @Column(nullable = false, length= 100,name="codigopostal")
     private String codigoPostal;

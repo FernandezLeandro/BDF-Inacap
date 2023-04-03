@@ -3,7 +3,7 @@ package com.bdf.inacap.domain.entity;
 import lombok.Data;
 
 @Data
-public class UsuarioComun extends Auditable {
+public class UsuarioComun{
 
     private String cuit;
     private String razonSocial;
