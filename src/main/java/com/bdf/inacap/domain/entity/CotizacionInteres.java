@@ -33,7 +33,7 @@ public class CotizacionInteres {
     public Double cotizar(Calendar fechaPago, Calendar fechaVencimiento) {
         Calendar fechaDesde = this.desde.before(fechaVencimiento) ? fechaVencimiento : this.desde;
         Calendar fechaHasta = fechaPago.before(this.hasta) || this.hasta == null ? fechaPago : this.hasta;
-        Double diasTranscurridos = new Double(DateUtil.obtenerDifferenciaDias(fechaDesde, fechaHasta));
+        Double diasTranscurridos = Double.valueOf(DateUtil.obtenerDifferenciaDias(fechaDesde, fechaHasta));
         return Math.max(this.interesDiario() * diasTranscurridos, 0D);
     }
 }
