@@ -16,9 +16,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.FetchType;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +30,9 @@ import java.util.Map;
 
 
 @Entity
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
 public class PlanDeDeudaLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,8 +3,8 @@ package com.bdf.inacap.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Getter
 @AllArgsConstructor
+@Getter
 public enum Observacion {
     OBSERVADO("CON OBS."), NO_OBSERVADO("SIN OBS.");
 

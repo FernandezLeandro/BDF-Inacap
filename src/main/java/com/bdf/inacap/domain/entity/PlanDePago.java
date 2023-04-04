@@ -10,7 +10,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Transient;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,8 +23,11 @@ import java.util.List;
 
 
 @Entity
-@Data
-public class PlanDePago{
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class PlanDePago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -82,6 +89,7 @@ public class PlanDePago{
         this.fechaCalcInteresesString = fechaCalcInteresesString;
     }
 
+    //TODO: Verificar el comentario line 97
     public BoletaEmitida generarBoleta(Long sec, List<CotizacionEmpleado> cotizacionesEmpleados) {
         BoletaEmitida boleta = new BoletaEmitida();
         Long empleados = (long) (this.empleadosAuditado - this.empleadosAbonado);

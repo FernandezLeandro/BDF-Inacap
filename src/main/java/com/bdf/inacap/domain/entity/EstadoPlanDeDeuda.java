@@ -18,8 +18,6 @@ public enum EstadoPlanDeDeuda {
             estado = EstadoPlanDeDeuda.APROBADO;
         else if (EstadoPlanDeDeuda.PENDIENTE_APROBACION.name().equalsIgnoreCase(leyenda))
             estado = EstadoPlanDeDeuda.PENDIENTE_APROBACION;
-        else if (EstadoPlanDeDeuda.APROBADO.name().equalsIgnoreCase(leyenda))
-            estado = EstadoPlanDeDeuda.APROBADO;
         else if (EstadoPlanDeDeuda.ARCHIVADO.name().equalsIgnoreCase(leyenda))
             estado = EstadoPlanDeDeuda.ARCHIVADO;
         else if (EstadoPlanDeDeuda.VENCIDO.name().equalsIgnoreCase(leyenda))

@@ -9,8 +9,10 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 
@@ -21,7 +23,9 @@ import java.util.Locale;
 
 
 @Entity
-@Data
+@AllArgsConstructor
+@Getter
+@Setter
 public class ItemPlanLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

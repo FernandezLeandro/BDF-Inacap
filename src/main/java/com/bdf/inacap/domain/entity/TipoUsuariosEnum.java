@@ -6,20 +6,20 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum TipoUsuariosEnum {
-    USUARIO(1L,"usuaio"),
-    EMPRESA(2L,"empresa"),
-    CONTADOR(3L,"contador");
+    USUARIO(1L, "usuaio"),
+    EMPRESA(2L, "empresa"),
+    CONTADOR(3L, "contador");
 
     private Long id;
     private String descripcion;
 
-    public static String getDescriptionByID(Long id){
+    public static String getDescriptionByID(Long id) {
         Integer ident = id.intValue();
-        return TipoUsuariosEnum.values()[ident -1].getDescripcion();
+        return TipoUsuariosEnum.values()[ident - 1].getDescripcion();
     }
 
-    public static TipoUsuariosEnum getTipoUsuarioByID(Long id){
+    public static TipoUsuariosEnum getTipoUsuarioByID(Long id) {
         Integer ident = id.intValue();
-        return TipoUsuariosEnum.values()[ident -1];
+        return TipoUsuariosEnum.values()[ident - 1];
     }
 }

@@ -26,36 +26,42 @@ public class CompanyController implements CompanyAPI{
     @Override
     @GetMapping
     public ResponseEntity<List<CompanyDTO>> getAll() {
-        return ResponseEntity.ok(this.companyService.getAll());
+        //return ResponseEntity.ok(this.companyService.getAll());
+        return null;
     }
 
     @Override
     @GetMapping("{id}")
     public ResponseEntity<CompanyDTO> getById(Long id) {
-        return ResponseEntity.ok(this.companyService.getCompanyByID(id));
+        //return ResponseEntity.ok(this.companyService.getCompanyByID(id));
+        return null;
     }
 
     @Override
     @GetMapping("/cuit/{cuit}")
     public ResponseEntity<CompanyDTO> getByCuit(Long cuit) {
-        return ResponseEntity.ok(this.companyService.getCompanyByCuit(cuit));
+        //return ResponseEntity.ok(this.companyService.getCompanyByCuit(cuit));
+        return null;
     }
 
     @Override
     @PostMapping
     public ResponseEntity<CompanyDTO> add(CompanyDTO companyDTO) {
-        return ResponseEntity.ok(this.companyService.add(companyDTO));
+        //return ResponseEntity.ok(this.companyService.add(companyDTO));
+        return null;
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<CompanyDTO> deleteByID(Long id) {
-        return ResponseEntity.ok(this.companyService.deleteByID(id));
+        //return ResponseEntity.ok(this.companyService.deleteByID(id));
+        return null;
     }
 
     @Override
     @PatchMapping("/{id}")
     public ResponseEntity<CompanyDTO> updateByID(CompanyDTO companyDTO, Long id) {
-        return ResponseEntity.ok(this.companyService.updateByID(companyDTO,id));
+        //return ResponseEntity.ok(this.companyService.updateByID(companyDTO,id));
+        return null;
     }
 }

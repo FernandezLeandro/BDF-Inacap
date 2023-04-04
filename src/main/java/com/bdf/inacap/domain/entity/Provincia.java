@@ -7,12 +7,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@NoArgsConstructor
 @AllArgsConstructor
-public class Provincia{
+@Getter
+@Setter
+public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,6 +24,7 @@ public class Provincia{
     @Basic
     @Column(unique = true, nullable = false, length = 50, name = "nombre")
     private String nombre;
+
     //TODO: Chequear si se usa, sino se borra
     public Provincia(Long id) {
         super();

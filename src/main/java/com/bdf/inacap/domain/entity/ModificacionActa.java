@@ -9,19 +9,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 @Entity
+@NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class ModificacionActa{
+@Getter
+@Setter
+public class ModificacionActa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     private Acta acta;
 

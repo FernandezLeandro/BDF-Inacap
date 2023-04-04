@@ -9,8 +9,10 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,8 +20,10 @@ import java.util.List;
 
 
 @Entity
-@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Periodo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +43,7 @@ public class Periodo {
 
     public String getTextHabilitadoEmision() {
         String habilitado = "Sí";
-        if (habilitadoEmision == false) {
+        if (!habilitadoEmision) {
             habilitado = "No";
         }
         return habilitado;
@@ -56,11 +60,12 @@ public class Periodo {
         return this.getPeriodo();
     }
 
+    //TODO: Chequear si se usa, sino se borra
     public Periodo(Long id) {
         super();
         this.id = id;
     }
-    
+
     public static Periodo getById(Long id, List<Periodo> periodoList) {
         for (Periodo per : periodoList) {
             if (per.id.equals(id))
