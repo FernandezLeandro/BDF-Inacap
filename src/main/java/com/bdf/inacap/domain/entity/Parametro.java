@@ -23,7 +23,7 @@ public class Parametro {
     private String valor;
 
     @Column(nullable = false, length = 20)
-    private String user;
+    private String userparam;
 
     @Column(nullable = false)
     private Timestamp lastUpdate;

@@ -14,7 +14,6 @@ import java.util.*;
 
 
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
 @Entity
