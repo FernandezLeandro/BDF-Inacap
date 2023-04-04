@@ -10,6 +10,8 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 
 import java.text.DecimalFormat;
@@ -25,6 +27,8 @@ public class ItemPlanLegal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @ManyToOne
     PlanDeDeudaLegal plan;
 

@@ -17,6 +17,8 @@ import jakarta.persistence.Transient;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.FetchType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,6 +50,8 @@ public class PlanDeDeudaLegal {
     @Column(nullable = false)
     TipoDePlanDeDeuda tipo;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "plan")
     List<ItemPlanLegal> items;
 

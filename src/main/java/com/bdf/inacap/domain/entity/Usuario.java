@@ -14,41 +14,41 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Data
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column( unique = true, nullable = false, name="login")
+    @Column(unique = true, nullable = false, name = "login")
     private String login;
 
-    @Column(nullable = false, name="password")
+    @Column(nullable = false, name = "password")
     private String password;
 
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name="apellido")
+    @Column(name = "apellido")
     private String apellido;
 
-    @Column(name="borrado")
+    @Column(name = "borrado")
     boolean borrado = false;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-    @JoinColumn(name="role_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
     private Rol role;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
-    @JoinColumn(name="roleMirror_id")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "roleMirror_id")
     private Rol roleMirror;
 
-    @Column(name="aprobadorCantidadPagos")
+    @Column(name = "aprobadorCantidadPagos")
     private boolean aprobadorCantidadPagos;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCambioContrasena;
 
     @Transient
-    private boolean alreadyEncripted=false;
+    private boolean alreadyEncripted = false;
 
 
     @Override
@@ -83,6 +83,7 @@ public class Usuario implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
     public boolean isAprobadorCantidadPagos() {
         return aprobadorCantidadPagos;
     }
@@ -91,7 +92,7 @@ public class Usuario implements UserDetails{
         return aprobadorCantidadPagos;
     }
 
-    public String getNombreCompleto(){
+    public String getNombreCompleto() {
         return this.getNombre() + " " + this.getApellido();
     }
 
