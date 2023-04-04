@@ -26,49 +26,36 @@ public class CompanyController implements CompanyAPI{
     @Override
     @GetMapping
     public ResponseEntity<List<CompanyDTO>> getAll() {
-        return ResponseEntity.ok(
-                this.companyService.getAll().stream()
-                        .map(this.companyMapper::deToDTO)
-                        .collect(Collectors.toList())
-                );
+        return ResponseEntity.ok(this.companyService.getAll());
     }
 
     @Override
     @GetMapping("{id}")
     public ResponseEntity<CompanyDTO> getById(Long id) {
-        return ResponseEntity.ok(
-                this.companyMapper.deToDTO(
-                this.companyService.getCompanyByID(id)));
+        return ResponseEntity.ok(this.companyService.getCompanyByID(id));
     }
 
     @Override
     @GetMapping("/cuit/{cuit}")
     public ResponseEntity<CompanyDTO> getByCuit(Long cuit) {
-        return ResponseEntity.ok(this.companyMapper.deToDTO(this.companyService.getCompanyByCuit(cuit)));
+        return ResponseEntity.ok(this.companyService.getCompanyByCuit(cuit));
     }
 
     @Override
     @PostMapping
     public ResponseEntity<CompanyDTO> add(CompanyDTO companyDTO) {
-        return ResponseEntity.ok(
-                this.companyMapper.deToDTO(
-                this.companyService.add(this.companyMapper.dtoToDE(companyDTO))
-                ));
+        return ResponseEntity.ok(this.companyService.add(companyDTO));
     }
 
     @Override
     @DeleteMapping("/{id}")
     public ResponseEntity<CompanyDTO> deleteByID(Long id) {
-        return ResponseEntity.ok(
-                this.companyMapper.deToDTO(this.companyService.deleteByID(id))
-        );
+        return ResponseEntity.ok(this.companyService.deleteByID(id));
     }
 
     @Override
     @PatchMapping("/{id}")
     public ResponseEntity<CompanyDTO> updateByID(CompanyDTO companyDTO, Long id) {
-        return ResponseEntity.ok(
-                this.companyMapper.deToDTO(this.companyService.updateByID(
-                        this.companyMapper.dtoToDE(companyDTO),id)));
+        return ResponseEntity.ok(this.companyService.updateByID(companyDTO,id));
     }
 }
