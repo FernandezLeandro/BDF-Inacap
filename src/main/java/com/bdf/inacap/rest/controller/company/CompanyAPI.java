@@ -20,7 +20,7 @@ public interface CompanyAPI {
 
     public ResponseEntity<CompanyDTO> add (@RequestBody CompanyDTO companyDTO);
 
-    public ResponseEntity<CompanyDTO> deleteByID (@PathVariable Long id);
+    public void deleteByID (@PathVariable Long id);
 
     public ResponseEntity<CompanyDTO> updateByID (@RequestBody CompanyDTO companyDTO, @PathVariable Long id);
 

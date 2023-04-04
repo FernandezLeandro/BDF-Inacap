@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface CompanyService {
 
-    public List<CompanyDE> getAll ();
+    public List<CompanyDTO> getAll ();
 
-    public CompanyDE add (CompanyDE newCompany);
+    public CompanyDTO add (CompanyDTO newCompany);
 
-    public CompanyDE deleteByID (Long id);
+    public void deleteByID (Long id);
 
-    public CompanyDE updateByID (CompanyDE newCompany, Long id);
+    public CompanyDTO updateByID (CompanyDTO newCompany, Long id);
 
-    public CompanyDE getCompanyByID(Long id);
+    public CompanyDTO getCompanyByID(Long id);
 
-    public CompanyDE getCompanyByCuit(Long cuit);
+    public CompanyDTO getCompanyByCuit(Long cuit);
 }

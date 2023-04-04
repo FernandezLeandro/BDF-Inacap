@@ -16,12 +16,11 @@ import java.util.stream.Collectors;
 public class CompanyController implements CompanyAPI{
 
     private CompanyService companyService;
-    private CompanyMapper companyMapper;
+
 
     @Autowired
-    public CompanyController(CompanyService companyService, CompanyMapper companyMapper){
+    public CompanyController(CompanyService companyService){
         this.companyService = companyService;
-        this.companyMapper = companyMapper;
     }
     @Override
     @GetMapping
@@ -51,11 +50,18 @@ public class CompanyController implements CompanyAPI{
         return null;
     }
 
+
+
     @Override
     @DeleteMapping("/{id}")
+<<<<<<< Updated upstream
     public ResponseEntity<CompanyDTO> deleteByID(Long id) {
         //return ResponseEntity.ok(this.companyService.deleteByID(id));
         return null;
+=======
+    public void deleteByID(Long id) {
+        this.companyService.getCompanyByID(id);
+>>>>>>> Stashed changes
     }
 
     @Override

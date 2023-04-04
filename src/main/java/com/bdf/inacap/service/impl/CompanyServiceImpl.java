@@ -1,10 +1,11 @@
 package com.bdf.inacap.service.impl;
 
 import com.bdf.inacap.domain.entity.CompanyDE;
-import com.bdf.inacap.exception.BadRequestException;
+import com.bdf.inacap.domain.mapper.CompanyMapper;
 import com.bdf.inacap.exception.CodeError;
 import com.bdf.inacap.exception.CompanyException;
 import com.bdf.inacap.repository.CompanyRepository;
+import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import com.bdf.inacap.service.interfaces.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,74 +19,77 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class CompanyServiceImpl implements CompanyService {
-    private CompanyRepository companyRepository;
+
+    private final CompanyRepository companyRepository;
+    private final CompanyMapper companyMapper;
 
     @Autowired
-    public CompanyServiceImpl (CompanyRepository companyRepository){
+    public CompanyServiceImpl (CompanyRepository companyRepository, CompanyMapper companyMapper){
         this.companyRepository = companyRepository;
+        this.companyMapper = companyMapper;
     }
 
     @Override
-    public List<CompanyDE> getAll() {
+    public List<CompanyDTO> getAll() {
         return getCompaniesEnabled();
     }
 
-
-
-    @Override
-    public CompanyDE add(CompanyDE newCompany){
-
-        //this.companyRepository.findByCuit(newCompany.cuit).orElseThrow(
-        //        () -> new CompanyException(HttpStatus.BAD_REQUEST, "Company already exists", CodeError.C400));
-
-        if(newCompany.getName()==null || newCompany.getName()=="" ){
-            throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
-        }
-        newCompany.setEstadoAlta(true);
-        return this.companyRepository.save(newCompany);
-
-    }
-
-    @Override
-    public CompanyDE deleteByID(Long id) {
-        CompanyDE companyToDelete =  this.getCompanyByID(id);
-        if (!isCompanyNull(companyToDelete)) {
-            companyToDelete.setEstadoAlta(false);
-            this.companyRepository.save(companyToDelete);
-            //this.companyRepository.delete(companyToDelete);
-        }
-        return companyToDelete; // Agregar excepciones o response entity personalizado (iria en service?)
-    }
-
-    @Override
-    public CompanyDE updateByID(CompanyDE newCompany, Long id) {
-        CompanyDE companyToUpdate = this.getCompanyByID(id);
-        companyToUpdate.setContactName(newCompany.contactName);
-        return this.companyRepository.save(companyToUpdate);
-    }
-
-    public CompanyDE getCompanyByID(Long id) {
-        return this.companyRepository.findById(id).orElseThrow(
-                () -> new CompanyException(HttpStatus.NOT_FOUND, "Id doesn't find", CodeError.C404));
-    }
-
-    @Override
-    public CompanyDE getCompanyByCuit(Long cuit) {
-        return this.companyRepository.findByCuit(cuit).orElseThrow(
-                () -> new CompanyException(HttpStatus.NOT_FOUND, "Cuit doesn't find", CodeError.C404));
-    }
-
-    private boolean isCompanyNull (CompanyDE companyDE){
-        return companyDE == null;
-    }
-
-    private List<CompanyDE> getCompaniesEnabled() {
+    private List<CompanyDTO> getCompaniesEnabled() {
         if(this.companyRepository.findAll().isEmpty()){
             throw new CompanyException(HttpStatus.NO_CONTENT, "Companies is empty", CodeError.C204);
         }
         return this.companyRepository.findAll().stream()
-                .filter(company -> company.getEstadoAlta())
+                .filter(company -> company.getEstadoAlta()==true)
+                .map(this.companyMapper::deToDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CompanyDTO add(CompanyDTO newCompany){
+
+        CompanyDE companyDE = this.companyMapper.dtoToDE(newCompany);
+        if(companyDE.getName()==null || companyDE.getName()=="" ){
+            throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
+        }
+        companyDE.setEstadoAlta(true);
+        return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
+
+    }
+
+    @Override
+    public void deleteByID(Long id) {
+        CompanyDE companyDE = this.companyMapper.dtoToDE(this.getCompanyByID(id));
+        companyDE.setEstadoAlta(false);
+        this.companyRepository.save(companyDE);
+            //this.companyRepository.delete(companyToDelete);
+    }
+
+    @Override
+    public CompanyDTO updateByID(CompanyDTO newCompany, Long id) {
+        CompanyDE companyDE = this.companyMapper.dtoToDE(this.getCompanyByID(id));
+        companyDE.setContactName(newCompany.contactName);
+        return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
+    }
+
+    public CompanyDTO getCompanyByID(Long id) {
+        this.companyRepository.findById(id).orElseThrow(
+                () -> new CompanyException(HttpStatus.NOT_FOUND, "Id doesn't find", CodeError.C404));
+        return  this.companyRepository.findById(id)
+                .map(this.companyMapper::deToDTO)
+                .orElse(null);
+    }
+
+    @Override
+    public CompanyDTO getCompanyByCuit(Long cuit) {
+        CompanyDE companyDE = this.companyRepository.findByCuit(cuit);
+        if(companyDE == null) {
+            throw new CompanyException(HttpStatus.NOT_FOUND, "Cuit doesn't find", CodeError.C404);
+        }
+        return this.companyMapper.deToDTO(this.companyRepository.findByCuit(cuit));
+    }
+
+    private boolean isCompanyNull (CompanyDE companyDE){
+        return companyDE == null;
     }
 
 }
