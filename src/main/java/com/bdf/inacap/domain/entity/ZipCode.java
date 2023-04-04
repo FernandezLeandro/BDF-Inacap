@@ -1,25 +1,23 @@
 package com.bdf.inacap.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 
-@SuppressWarnings("serial")
 @Entity
 @Data
-public class ZipCode{
-
-    @Column(nullable = false, length= 100,name="codigopostal")
+public class ZipCode {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, length = 100, name = "codigopostal")
     private String codigoPostal;
 
-    @Column(nullable = false, length= 100,name="partido")
+    @Column(nullable = false, length = 100, name = "partido")
     private String partido;
 
-    @Column(nullable = false, length= 100,name="localidad")
+    @Column(nullable = false, length = 100, name = "localidad")
     private String localidad;
 
     @ManyToOne
@@ -29,27 +27,27 @@ public class ZipCode{
     private String localidadCompuesta;
 
     public Long getId_provincia() {
-        if(provincia != null && provincia.getId() != null){
+        if (provincia != null && provincia.getId() != null) {
             return provincia.getId();
-        }else {
+        } else {
             return -1L;
         }
     }
 
-    public String getLocalidadCompuesta(){
+    public String getLocalidadCompuesta() {
         this.localidadCompuesta = this.codigoPostal + " - " + this.partido + " - " + this.localidad;
         return this.localidadCompuesta;
     }
 
-    public static String getOptionsList(List<ZipCode> codigosPostales){
-        StringBuilder ciudadesString=new StringBuilder("<option value='-1' label='Seleccionar'/>");
+    public static String getOptionsList(List<ZipCode> codigosPostales) {
+        StringBuilder ciudadesString = new StringBuilder("<option value='-1' label='Seleccionar'/>");
         for (ZipCode codigoPostal : codigosPostales) {
-            ciudadesString.append("<option value='"+codigoPostal.getCodigoPostal()+"'>"+codigoPostal.getLocalidadCompuesta()+"</option>");
+            ciudadesString.append("<option value='" + codigoPostal.getCodigoPostal() + "'>" + codigoPostal.getLocalidadCompuesta() + "</option>");
         }
         return ciudadesString.toString();
     }
 
-    public String getCodigoPostalLocalidad(){
+    public String getCodigoPostalLocalidad() {
         return codigoPostal + " - " + localidad;
     }
 }

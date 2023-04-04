@@ -10,22 +10,23 @@ public enum TipoDePlanDeDeuda {
 
     String leyenda;
 
-    public static TipoDePlanDeDeuda getTipoPlan(String leyenda){
+    public static TipoDePlanDeDeuda getTipoPlan(String leyenda) {
         TipoDePlanDeDeuda tipo = null;
 
         if (TipoDePlanDeDeuda.FISCALIZADOR.name().equalsIgnoreCase(leyenda))
             tipo = FISCALIZADOR;
-        else if(TipoDePlanDeDeuda.NORMAL.name().equalsIgnoreCase(leyenda))
+        else if (TipoDePlanDeDeuda.NORMAL.name().equalsIgnoreCase(leyenda))
             tipo = TipoDePlanDeDeuda.NORMAL;
 
         return tipo;
     }
-    public static String DevolverLeyendaXOrdinal(Integer ordinal){
+
+    public static String DevolverLeyendaXOrdinal(Integer ordinal) {
         String leyenda = null;
 
         if (ordinal.equals(0))
             leyenda = TipoDePlanDeDeuda.NORMAL.getLeyenda();
-        else if(ordinal.equals(1))
+        else if (ordinal.equals(1))
             leyenda = TipoDePlanDeDeuda.FISCALIZADOR.getLeyenda();
 
         return leyenda;

@@ -6,28 +6,30 @@ import lombok.Data;
 import java.util.HashSet;
 import java.util.Set;
 
-@SuppressWarnings("serial")
 @Entity
 @Data
 public class TipoItemLegal {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     String nombre;
 
     @Basic
-    @Column(nullable=false,length=2)
+    @Column(nullable = false, length = 2)
     String codigo;
 
     @Basic
-    @Column(nullable=false)
+    @Column(nullable = false)
     String descripcion;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="tipo_id", unique = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "tipo_id", unique = true)
     Set<EstadoItemLegal> estados;
 
-    public TipoItemLegal(){
+    public TipoItemLegal() {
         this.setEstados(new HashSet<EstadoItemLegal>());
     }
 
@@ -39,7 +41,7 @@ public class TipoItemLegal {
     }
 
     @Transient
-    public EstadoItemLegal getEstadoItemLegalInicial(){
+    public EstadoItemLegal getEstadoItemLegalInicial() {
         EstadoItemLegal estadoItemLegalInicial = null;
         for (EstadoItemLegal estado : this.getEstados())
             if (estado.getNombre().equalsIgnoreCase("INICIAL"))

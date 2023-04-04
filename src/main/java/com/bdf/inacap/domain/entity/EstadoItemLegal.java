@@ -16,6 +16,7 @@ public class EstadoItemLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Basic
     @Column(nullable = false, unique = true)
     String nombre;
