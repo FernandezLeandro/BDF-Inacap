@@ -8,10 +8,6 @@ import lombok.Data;
 @Embeddable
 public class Contacto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Basic
     String nombre;
 

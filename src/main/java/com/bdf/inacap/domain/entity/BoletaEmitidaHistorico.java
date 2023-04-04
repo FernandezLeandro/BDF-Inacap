@@ -4,13 +4,17 @@ package com.bdf.inacap.domain.entity;
 import com.bdf.inacap.log.ArchivoCargado;
 import com.bdf.inacap.utils.DateUtil;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-@Data
+
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 public class BoletaEmitidaHistorico {
 

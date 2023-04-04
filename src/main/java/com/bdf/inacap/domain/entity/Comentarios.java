@@ -2,7 +2,7 @@ package com.bdf.inacap.domain.entity;
 
 import com.bdf.inacap.utils.FormateadorDeFechas;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,7 +10,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 public class Comentarios {
 

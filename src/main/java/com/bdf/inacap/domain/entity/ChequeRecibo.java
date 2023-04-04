@@ -1,11 +1,15 @@
 package com.bdf.inacap.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity(name = "ChequeRecibo")
 public class ChequeRecibo {
 

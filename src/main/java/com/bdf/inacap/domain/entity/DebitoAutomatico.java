@@ -1,7 +1,7 @@
 package com.bdf.inacap.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,7 +10,11 @@ import java.util.Date;
 import java.util.List;
 
 
-@Data
+
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity(name = "DebitoAutomatico")
 public class DebitoAutomatico {
 

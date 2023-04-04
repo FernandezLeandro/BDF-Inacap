@@ -1,16 +1,18 @@
 package com.bdf.inacap.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
-@Data
-@Entity(name = "ChequeEnCarteraLog")
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
+@Entity(name = "ChequeEnCarteraLog")
 public class ChequeEnCarteraLog {
 
     @Id

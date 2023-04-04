@@ -1,5 +1,6 @@
 package com.bdf.inacap.domain.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter

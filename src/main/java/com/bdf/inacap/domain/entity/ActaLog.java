@@ -2,13 +2,18 @@ package com.bdf.inacap.domain.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.util.Calendar;
 import java.util.Date;
 
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
-@Data
 public class ActaLog {
 
     @Id

@@ -2,7 +2,7 @@ package com.bdf.inacap.domain.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,7 +12,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-@Data
+
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 public class Empresa implements UserDetails {
 

@@ -3,9 +3,13 @@ package com.bdf.inacap.domain.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity(name="ChequeEnCartera")
 public class ChequeEnCartera {
 

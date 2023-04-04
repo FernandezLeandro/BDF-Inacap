@@ -2,9 +2,13 @@ package com.bdf.inacap.domain.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Embeddable
 public class Domicilio {
 

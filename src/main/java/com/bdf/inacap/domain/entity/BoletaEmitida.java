@@ -3,7 +3,7 @@ package com.bdf.inacap.domain.entity;
 import com.bdf.inacap.utils.DateUtil;
 import com.bdf.inacap.utils.Utils;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity(name = "BoletaEmitida")
 public class BoletaEmitida {
 

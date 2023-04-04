@@ -1,6 +1,7 @@
 package com.bdf.inacap.domain.entity;
 
-import lombok.Getter;
+import jakarta.persistence.Entity;
+import lombok.*;
 
 @Getter
 public enum EstadoDebitoAutomatico {

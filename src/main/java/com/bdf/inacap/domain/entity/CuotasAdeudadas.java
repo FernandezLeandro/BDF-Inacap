@@ -1,12 +1,16 @@
 package com.bdf.inacap.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity(name = "CuotasAdeudadas")
 @IdClass(CuotasAdeudadas.class)
 public class CuotasAdeudadas implements Serializable {
