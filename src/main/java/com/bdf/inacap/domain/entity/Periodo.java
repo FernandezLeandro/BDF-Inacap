@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class Periodo extends Auditable {
+public class Periodo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

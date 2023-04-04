@@ -163,7 +163,7 @@ public class BoletaEmitida {
         total = total * 100;
         // Round to the nearest integer.
         long tmp = Math.round(total);
-        double dbl = new Double(tmp);
+        Double dbl = Double.valueOf(tmp);
         return Utils.completarDosDecimales(dbl / 100);
     }
 

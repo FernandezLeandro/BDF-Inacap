@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Data
-public class Parametro extends Auditable {
+public class Parametro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

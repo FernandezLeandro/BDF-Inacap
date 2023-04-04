@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @AllArgsConstructor
-public class Provincia extends Auditable {
+public class Provincia{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +20,7 @@ public class Provincia extends Auditable {
     @Basic
     @Column(unique = true, nullable = false, length = 50, name = "nombre")
     private String nombre;
-
+    //TODO: Chequear si se usa, sino se borra
     public Provincia(Long id) {
         super();
         this.id = id;

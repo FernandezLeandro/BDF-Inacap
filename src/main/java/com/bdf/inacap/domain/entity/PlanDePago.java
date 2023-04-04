@@ -20,7 +20,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class PlanDePago extends Auditable {
+public class PlanDePago{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

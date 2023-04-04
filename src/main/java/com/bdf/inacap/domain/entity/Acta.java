@@ -2,7 +2,10 @@ package com.bdf.inacap.domain.entity;
 
 import com.bdf.inacap.utils.FormateadorDeFechas;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -12,7 +15,9 @@ import java.util.*;
 
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class Acta {
 
     @Id

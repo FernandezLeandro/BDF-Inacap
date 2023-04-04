@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 @Entity
 @Data
-public class HistoriaLegal extends Auditable {
+public class HistoriaLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

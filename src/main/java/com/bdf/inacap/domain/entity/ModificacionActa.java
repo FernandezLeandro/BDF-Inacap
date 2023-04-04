@@ -18,7 +18,7 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @Data
-public class ModificacionActa extends Auditable {
+public class ModificacionActa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

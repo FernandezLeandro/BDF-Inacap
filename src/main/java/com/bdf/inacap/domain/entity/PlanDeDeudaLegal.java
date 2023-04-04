@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Entity
 @Data
-public class PlanDeDeudaLegal extends Auditable {
+public class PlanDeDeudaLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

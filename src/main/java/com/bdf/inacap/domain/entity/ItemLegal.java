@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class ItemLegal extends Auditable {
+public class ItemLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

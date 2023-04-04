@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class EventoLegal extends Auditable {
+public class EventoLegal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

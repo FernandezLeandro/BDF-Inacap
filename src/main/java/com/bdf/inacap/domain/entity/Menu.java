@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Menu extends Auditable implements Comparable {
+public class Menu implements Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

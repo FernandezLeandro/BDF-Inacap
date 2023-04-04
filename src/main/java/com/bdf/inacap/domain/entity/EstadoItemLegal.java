@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class EstadoItemLegal extends Auditable {
+public class EstadoItemLegal {
     //TODO: Atributos deberian ser privados?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

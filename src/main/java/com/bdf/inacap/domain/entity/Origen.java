@@ -20,27 +20,7 @@ public enum Origen {
     private Integer id;
     private String descripcion;
 
-    public static Origen valueOf(Integer id) {
-        switch (id.intValue()) {
-            case 0:
-                return Origen.WEB;
-            case 1:
-                return Origen.MANUAL;
-            case 2:
-                return Origen.RESTAURADO;
-            case 3:
-                return Origen.PLAN;
-            case 4:
-                return Origen.BATCH_AUMENTO;
-            case 5:
-                return Origen.LEGAL;
-            case 6:
-                return Origen.DEBITO_AUTOMATICO;
-            default:
-                return null;
-        }
-    }
-
+    //TODO: Averiguar si java retorna todos los enums
     public static List<Origen> getOrigenesBoleta() {
         List<Origen> origenes = new ArrayList<Origen>();
         origenes.add(Origen.MANUAL);

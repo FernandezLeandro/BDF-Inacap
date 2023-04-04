@@ -20,7 +20,7 @@ import java.util.Locale;
 
 @Entity
 @Data
-public class ItemPlanLegal extends Auditable {
+public class ItemPlanLegal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity(name = "CuotasAdeudadas")
 @IdClass(CuotasAdeudadas.class)
 public class CuotasAdeudadas implements Serializable {
-
+    //TODO: REVISAR ESTO POR EL AMOR DE DIOS
     @Id
     @ManyToOne
     @JoinColumn(name = "idPeriodo")
