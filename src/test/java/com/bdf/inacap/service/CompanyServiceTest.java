@@ -119,6 +119,20 @@ public class CompanyServiceTest {
     }
 
     @Test
+    @DisplayName("Deberia retornar una compania por id")
+    public void shouldReturnCompanyByID() {
+        when(this.companyRepository.findById(company.id)).thenReturn(Optional.ofNullable(this.company));
+        when(this.companyMapper.deToDTO(any(CompanyDE.class))).thenReturn(this.companyDTO);
+        assertEquals(this.companyService.getCompanyByID(this.companyDTO.id), this.companyDTO);
+    }
+    @Test
+    @DisplayName("Deberia retornar CompanyException si no encuentra una empresa por id no existente")
+    public void shouldReturnFailCompanyExceptionCompanyByIDNotFound() {
+        this.company = generator.nextObject(CompanyDE.class);
+        assertThrows(CompanyException.class, () -> this.companyService.getCompanyByID(this.company.id));
+    }
+
+    @Test
     @DisplayName("Deberia retornar una compania no nula")
     public void saveCompany() {
         when(this.companyMapper.dtoToDE(companyDTO)).thenReturn(this.company);
