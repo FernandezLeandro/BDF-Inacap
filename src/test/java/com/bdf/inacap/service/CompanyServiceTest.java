@@ -109,6 +109,18 @@ public class CompanyServiceTest {
 
         assertEquals(this.companyService.getCompanyByCuit(this.company.getCuit()), this.companyDTO);
     }
+
+    @Test
+    @DisplayName("Deberia retornar una compania no nula")
+    public void saveCompany() {
+        when(this.companyMapper.dtoToDE(companyDTO)).thenReturn(this.company);
+        this.company.setEstadoAlta(true);
+        when(this.companyRepository.save(this.company)).thenReturn(this.company);
+        when(this.companyMapper.deToDTO(company)).thenReturn(companyDTO);
+        assertNotNull(this.companyService.save(companyDTO));
+    }
+
+
 /*
     @Test
     public void shouldFailCompanyException() {

@@ -46,9 +46,8 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDTO save(CompanyDTO newCompany){
-
         CompanyDE companyDE = this.companyMapper.dtoToDE(newCompany);
-        if(companyDE.getName()==null || companyDE.getName()=="" ){
+         if(newCompany.getNameCompany()==null || newCompany.getNameCompany()=="" ){
             throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
         }
         companyDE.setEstadoAlta(true);
