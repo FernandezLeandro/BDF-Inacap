@@ -18,7 +18,7 @@ public interface CompanyAPI {
 
     public ResponseEntity<CompanyDTO> getByCuit(@PathVariable Long cuit);
 
-    public ResponseEntity<CompanyDTO> add (@RequestBody CompanyDTO companyDTO);
+    public ResponseEntity<CompanyDTO> create (@RequestBody CompanyDTO companyDTO);
 
     public void deleteByID (@PathVariable Long id);
 

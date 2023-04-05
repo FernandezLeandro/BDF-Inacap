@@ -42,8 +42,8 @@ public class CompanyController implements CompanyAPI{
 
     @Override
     @PostMapping
-    public ResponseEntity<CompanyDTO> add(CompanyDTO companyDTO) {
-       return ResponseEntity.ok(this.companyService.add(companyDTO));
+    public ResponseEntity<CompanyDTO> create(CompanyDTO companyDTO) {
+       return ResponseEntity.ok(this.companyService.save(companyDTO));
     }
 
 

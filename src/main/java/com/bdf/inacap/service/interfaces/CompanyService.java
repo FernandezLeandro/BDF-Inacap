@@ -9,7 +9,7 @@ public interface CompanyService {
 
     public List<CompanyDTO> getAll ();
 
-    public CompanyDTO add (CompanyDTO newCompany);
+    public CompanyDTO save (CompanyDTO newCompany);
 
     public void deleteByID (Long id);
 

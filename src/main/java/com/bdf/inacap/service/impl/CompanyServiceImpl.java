@@ -39,13 +39,13 @@ public class CompanyServiceImpl implements CompanyService {
             throw new CompanyException(HttpStatus.NO_CONTENT, "Companies is empty", CodeError.C204);
         }
         return this.companyRepository.findAll().stream()
-                .filter(company -> company.getEstadoAlta()==true)
+                .filter(company -> company.getEstadoAlta())
                 .map(this.companyMapper::deToDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CompanyDTO add(CompanyDTO newCompany){
+    public CompanyDTO save(CompanyDTO newCompany){
 
         CompanyDE companyDE = this.companyMapper.dtoToDE(newCompany);
         if(companyDE.getName()==null || companyDE.getName()=="" ){
@@ -68,6 +68,7 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyDTO updateByID(CompanyDTO newCompany, Long id) {
         CompanyDE companyDE = this.companyMapper.dtoToDE(this.getCompanyByID(id));
         companyDE.setContactName(newCompany.contactName);
+        companyDE.setEstadoAlta(true);
         return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
     }
 
