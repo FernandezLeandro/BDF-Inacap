@@ -50,8 +50,8 @@ public class CompanyController implements CompanyAPI{
 
     @Override
     @DeleteMapping("/{id}")
-    public void deleteByID(Long id) {
-        this.companyService.deleteByID(id);
+    public ResponseEntity<CompanyDTO> deleteByID(Long id) {
+        return ResponseEntity.ok(this.companyService.deleteByID(id));
     }
 
     @Override

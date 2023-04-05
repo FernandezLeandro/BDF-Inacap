@@ -11,7 +11,7 @@ public interface CompanyService {
 
     public CompanyDTO save (CompanyDTO newCompany);
 
-    public void deleteByID (Long id);
+    public CompanyDTO deleteByID (Long id);
 
     public CompanyDTO updateByID (CompanyDTO newCompany, Long id);
 
