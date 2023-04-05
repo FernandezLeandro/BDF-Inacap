@@ -120,6 +120,14 @@ public class CompanyServiceTest {
         assertNotNull(this.companyService.save(companyDTO));
     }
 
+    @Test
+    @DisplayName("Deberia una excepcion si el nombre de la compania es null")
+    public void saveCompanyNameNullException() {
+        this.companyDTO.nameCompany=null;
+        assertThrows(CompanyException.class,()-> this.companyService.save(companyDTO));
+    }
+
+
 
 /*
     @Test
