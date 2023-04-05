@@ -9,6 +9,7 @@ import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import com.bdf.inacap.service.impl.CompanyServiceImpl;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -58,6 +59,7 @@ public class CompanyServiceTest {
     }
 
     @Test
+    @DisplayName("Deberia retornar todas las companias activas")
     public void shouldReturnAllCompanies() {
         this.company.estadoAlta = true;
         when(this.companyRepository.findAll()).thenReturn(Arrays.asList(company));
@@ -68,17 +70,22 @@ public class CompanyServiceTest {
         assertNotNull(this.companyService.getAll());
 
     }
-/*
+
     @Test
-    public void shouldFailToReturnAllCompanies() {
+    @DisplayName("Deberia retornar una lista vacia cuando tiene elementos con estadoAlta=false")
+    public void shouldReturnEmptyCompanies() {
         this.company.estadoAlta= false;
         initEmptyCompanies();
 
         when(this.companyRepository.findAll()).thenReturn(Arrays.asList(company));
 
         assertEquals(this.companyService.getAll(),this.emptyCompanies);
+        assertNotNull(this.companyService.getAll());
     }
-
+    private void initEmptyCompanies() {
+        this.emptyCompanies = new ArrayList<>();
+    }
+/*
     @Test
     public void shouldReturnCompanyByCuit() {
         when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(Optional.ofNullable(this.company));
@@ -115,8 +122,6 @@ public class CompanyServiceTest {
         assertFalse(this.companyService.deleteByID(this.company.id).getEstadoAlta());
     }
 
-    private void initEmptyCompanies() {
-        this.emptyCompanies = new ArrayList<>();
-    }
+
 */
 }
