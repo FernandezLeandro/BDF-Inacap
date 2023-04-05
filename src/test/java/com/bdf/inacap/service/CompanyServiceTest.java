@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.convert.DataSizeUnit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,14 +100,16 @@ public class CompanyServiceTest {
 
         assertThrows(CompanyException.class, () -> this.companyService.getAll());
     }
-/*
+
     @Test
+    @DisplayName("Deberia retornar una compania por id")
     public void shouldReturnCompanyByCuit() {
-        when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(Optional.ofNullable(this.company));
+        when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(this.company);
+        when(this.companyMapper.deToDTO(any(CompanyDE.class))).thenReturn(this.companyDTO);
 
-        assertEquals(this.companyService.getCompanyByCuit(this.company.getCuit()), this.company);
+        assertEquals(this.companyService.getCompanyByCuit(this.company.getCuit()), this.companyDTO);
     }
-
+/*
     @Test
     public void shouldFailCompanyException() {
         initEmptyCompanies();
