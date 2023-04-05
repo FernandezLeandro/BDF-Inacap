@@ -111,6 +111,14 @@ public class CompanyServiceTest {
     }
 
     @Test
+    @DisplayName("Deberia retornar CompanyException si no encuentra una empresa by cuit")
+    public void shouldReturnFailCompanyExceptionCompanyByCuitNotFound() {
+        when(this.companyRepository.findByCuit(any(Long.class))).thenReturn(null);
+
+        assertThrows(CompanyException.class, () -> this.companyService.getCompanyByCuit(any(Long.class)));
+    }
+
+    @Test
     @DisplayName("Deberia retornar una compania no nula")
     public void saveCompany() {
         when(this.companyMapper.dtoToDE(companyDTO)).thenReturn(this.company);
