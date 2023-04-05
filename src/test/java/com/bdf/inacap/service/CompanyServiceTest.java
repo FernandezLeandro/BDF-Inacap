@@ -38,7 +38,8 @@ public class CompanyServiceTest {
     private CompanyDE company;
     private CompanyDTO companyDTO;
     private EasyRandom generator;
-    private List emptyCompanies;
+    private List<CompanyDTO> emptyCompaniesDTO;
+    private List<CompanyDE> emptyCompaniesDE;
 
     @BeforeEach
     public void setUp (){
@@ -72,18 +73,31 @@ public class CompanyServiceTest {
     }
 
     @Test
-    @DisplayName("Deberia retornar una lista vacia cuando tiene elementos con estadoAlta=false")
+    @DisplayName("Deberia retornar una lista vacia cuando sus elementos tienen estadoAlta=false")
     public void shouldReturnEmptyCompanies() {
         this.company.estadoAlta= false;
-        initEmptyCompanies();
+        initEmptyCompaniesDTO();
 
         when(this.companyRepository.findAll()).thenReturn(Arrays.asList(company));
 
-        assertEquals(this.companyService.getAll(),this.emptyCompanies);
+        assertEquals(this.companyService.getAll(),this.emptyCompaniesDTO);
         assertNotNull(this.companyService.getAll());
     }
-    private void initEmptyCompanies() {
-        this.emptyCompanies = new ArrayList<>();
+    //TODO: Se puede abstraer los dos metodos initEmpty... en uno
+    private void initEmptyCompaniesDTO() {
+        this.emptyCompaniesDTO = new ArrayList<>();
+    }
+    private void initEmptyCompaniesDE() {
+        this.emptyCompaniesDE= new ArrayList<>();
+    }
+
+    @Test
+    @DisplayName("Deberia tirar CompanyException si la lista no tiene elementos")
+    public void shouldFailCompanyExceptionToReturnAllCompanies() {
+        initEmptyCompaniesDE();
+        when(this.companyRepository.findAll()).thenReturn(this.emptyCompaniesDE);
+
+        assertThrows(CompanyException.class, () -> this.companyService.getAll());
     }
 /*
     @Test
