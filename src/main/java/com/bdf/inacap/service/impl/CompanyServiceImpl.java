@@ -85,7 +85,11 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDTO updateByID(CompanyDTO newCompany, Long id) {
         CompanyDE companyDE = this.companyMapper.dtoToDE(this.getCompanyByID(id));
+        this.companyRepository.findById(companyDE.id).orElseThrow(
+                () -> new CompanyException(HttpStatus.NOT_FOUND, "Id doesn't find", CodeError.C404));
         companyDE.setContactName(newCompany.contactName);
+        companyDE.setContactNumber(newCompany.contactNumber);
+        companyDE.setEmail(newCompany.email);
         companyDE.setEstadoAlta(true);
         return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
     }
