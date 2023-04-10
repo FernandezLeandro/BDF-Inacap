@@ -150,6 +150,45 @@ public class CompanyServiceTest {
     }
 
     @Test
+    @DisplayName("Deberia retornar la compania con el nombre de contacto actualizado")
+    public void shouldReturnUpdateContactNameInCompany() {
+        dtoToDeAndFindByID();
+        this.company.setContactName("Agustina");
+        this.company.setEstadoAlta(true);
+        saveCompanyAndDeToDto();
+        assertEquals(this.companyDTO.contactName, this.companyService.updateByID(companyDTO,company.id).contactName);
+    }
+
+    @Test
+    public void shouldReturnUpdateEmailInCompany() {
+        dtoToDeAndFindByID();
+        this.company.setEmail("agustina@gmail.com");
+        this.company.setEstadoAlta(true);
+        saveCompanyAndDeToDto();
+        assertEquals(this.companyDTO.contactName, this.companyService.updateByID(companyDTO,company.id).contactName);
+    }
+
+    @Test
+    public void shouldReturnUpdateEmailAndContactNameInCompany() {
+        dtoToDeAndFindByID();
+        this.company.setContactName("Agustina");
+        this.company.setEmail("agustina@gmail.com");
+        this.company.setEstadoAlta(true);
+        saveCompanyAndDeToDto();
+        assertEquals(this.companyDTO.contactName, this.companyService.updateByID(companyDTO,company.id).contactName);
+    }
+
+    private void saveCompanyAndDeToDto() {
+        when(this.companyRepository.save(this.company)).thenReturn(this.company);
+        when(this.companyMapper.deToDTO(this.company)).thenReturn(this.companyDTO);
+    }
+
+    private void dtoToDeAndFindByID() {
+        when(this.companyMapper.dtoToDE(this.companyDTO)).thenReturn(this.company);
+        when(this.companyRepository.findById(this.company.id)).thenReturn(Optional.ofNullable(this.company));
+    }
+
+    @Test
     @DisplayName("Deberia retornar la compania con estadoAlta=false")
     public void shouldReturnCompanyDeletedLogically() {
         this.company.setEstadoAlta(true);
