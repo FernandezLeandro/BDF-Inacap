@@ -151,7 +151,7 @@ public class CompanyServiceTest {
     @Test
     @DisplayName("Deberia retornar la compania con el nombre de contacto actualizado")
     public void shouldReturnUpdateContactNameInCompany() {
-        dtoToDeAndFindByID();
+        dtoToDeAndFindByID(this.company.id);
         this.company.setContactName("Agustina");
         this.company.setEstadoAlta(true);
         saveCompanyAndDeToDto();
@@ -159,8 +159,9 @@ public class CompanyServiceTest {
     }
 
     @Test
+    @DisplayName("Deberia retornar la compania con el email de contacto actualizado")
     public void shouldReturnUpdateEmailInCompany() {
-        dtoToDeAndFindByID();
+        dtoToDeAndFindByID(this.company.id);
         this.company.setEmail("agustina@gmail.com");
         this.company.setEstadoAlta(true);
         saveCompanyAndDeToDto();
@@ -168,8 +169,37 @@ public class CompanyServiceTest {
     }
 
     @Test
+    @DisplayName("Deberia retornar CompanyException si no encuentra una empresa por id no existente")
+    public void shouldReturnExceptionUpdateInCompanyByIdNotFound() {
+        this.company = generator.nextObject(CompanyDE.class);
+        assertThrows(CompanyException.class, () ->this.companyService.updateByID(this.companyDTO, company.id));
+    }
+
+    @Test
+    @DisplayName("Deberia retornar la compania actual sin modificaciones")
+    public void shouldReturnFailUpdateNullInCompany() {
+        dtoToDeAndFindByID(this.company.id);
+        this.company.setContactName(null);
+        this.company.setEmail(null);
+        this.company.setEstadoAlta(true);
+        saveCompanyAndDeToDto();
+        assertEquals(this.companyDTO.contactName, this.companyService.updateByID(companyDTO,company.id).contactName);
+    }
+
+    @Test
+    @DisplayName("Deberia retornar la compania actual sin modificaciones")
+    public void shouldReturnFailUpdateEmptyInCompany() {
+        dtoToDeAndFindByID(this.company.id);
+        this.company.setContactName("");
+        this.company.setEmail("");
+        this.company.setEstadoAlta(true);
+        saveCompanyAndDeToDto();
+        assertEquals(this.companyDTO.contactName, this.companyService.updateByID(companyDTO,company.id).contactName);
+    }
+
+    @Test
     public void shouldReturnUpdateEmailAndContactNameInCompany() {
-        dtoToDeAndFindByID();
+        dtoToDeAndFindByID(this.company.id);
         this.company.setContactName("Agustina");
         this.company.setEmail("agustina@gmail.com");
         this.company.setEstadoAlta(true);
@@ -182,10 +212,11 @@ public class CompanyServiceTest {
         when(this.companyMapper.deToDTO(this.company)).thenReturn(this.companyDTO);
     }
 
-    private void dtoToDeAndFindByID() {
+    private void dtoToDeAndFindByID(Long l) {
         when(this.companyMapper.dtoToDE(this.companyDTO)).thenReturn(this.company);
-        when(this.companyRepository.findById(this.company.id)).thenReturn(Optional.ofNullable(this.company));
+        when(this.companyRepository.findById(l)).thenReturn(Optional.ofNullable(this.company));
     }
+
 
     @Test
     @DisplayName("Deberia retornar la compania con estadoAlta=false")
