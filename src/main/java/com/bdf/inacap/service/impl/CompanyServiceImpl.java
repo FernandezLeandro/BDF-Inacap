@@ -87,9 +87,12 @@ public class CompanyServiceImpl implements CompanyService {
         CompanyDE companyDE = this.companyMapper.dtoToDE(this.getCompanyByID(id));
         this.companyRepository.findById(companyDE.id).orElseThrow(
                 () -> new CompanyException(HttpStatus.NOT_FOUND, "Id doesn't find", CodeError.C404));
+        if(newCompany.contactName != null && !newCompany.contactName.equals("")){
         companyDE.setContactName(newCompany.contactName);
-        companyDE.setContactNumber(newCompany.contactNumber);
+        }
+        if(newCompany.email !=null && !newCompany.email.equals("")){
         companyDE.setEmail(newCompany.email);
+        }
         companyDE.setEstadoAlta(true);
         return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
     }
