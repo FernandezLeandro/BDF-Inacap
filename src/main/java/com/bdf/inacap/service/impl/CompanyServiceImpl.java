@@ -32,15 +32,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDTO> getAll() {
-        return getCompaniesEnabled();
-    }
-
-    private List<CompanyDTO> getCompaniesEnabled() {
-        if (this.companyRepository.findAll().isEmpty()) {
-            throw new CompanyException(HttpStatus.NO_CONTENT, "Companies is empty", CodeError.C204);
-        }
-        return this.companyRepository.findAll().stream()
-                .filter(company -> company.getEstadoAlta())
+        if(findCompaniesEnabled().isEmpty()){
+            throw new CompanyException(HttpStatus.NO_CONTENT);
+        }else
+            return findCompaniesEnabled().stream()
                 .map(this.companyMapper::deToDTO)
                 .collect(Collectors.toList());
     }
@@ -106,10 +101,6 @@ public class CompanyServiceImpl implements CompanyService {
             throw new CompanyException(HttpStatus.NOT_FOUND, "Cuit doesn't find", CodeError.C404);
         }
         return this.companyMapper.deToDTO(this.companyRepository.findByCuit(cuit));
-    }
-
-    private boolean isCompanyNull(CompanyDE companyDE) {
-        return companyDE == null;
     }
 
 }

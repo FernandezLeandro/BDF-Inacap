@@ -17,6 +17,10 @@ public class CompanyException extends RuntimeException{
         this.message = "Message error is not defined";
     }
 
+    public CompanyException (HttpStatus status){
+        this.status = status;
+    }
+
     public CompanyException (HttpStatus status, String message, CodeError codeError){
         this.status = status;
         this.message = message;
