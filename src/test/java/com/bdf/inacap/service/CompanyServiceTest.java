@@ -149,7 +149,15 @@ public class CompanyServiceTest {
         assertThrows(CompanyException.class,()-> this.companyService.save(companyDTO));
     }
 
-
+    @Test
+    @DisplayName("Deberia retornar la compania con estadoAlta=false")
+    public void shouldReturnCompanyDeletedLogically() {
+        this.company.setEstadoAlta(true);
+        when(this.companyRepository.findAll()).thenReturn(Arrays.asList(this.company));
+        when(this.companyRepository.save(any(CompanyDE.class))).thenReturn(this.company);
+        when(this.companyMapper.deToDTO(this.company)).thenReturn(this.companyDTO);
+        assertEquals(this.companyDTO, this.companyService.deleteByID(this.company.getId()));
+    }
 
 /*
     @Test
