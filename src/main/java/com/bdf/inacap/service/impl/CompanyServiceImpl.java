@@ -58,24 +58,16 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyDTO deleteByID(Long id) {
-        /* OLD CODE
-        CompanyDE companyDE = this.companyMapper.dtoToDE(this.getCompanyByID(id));
-        companyDE.setEstadoAlta(false);
-        this.companyRepository.save(companyDE);
-         */
-        if(findCompanyById(id).isPresent()){
-            CompanyDE companyDE = findCompanyById(id).get();
-            companyDE.setEstadoAlta(false);
-            return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
+        Optional<CompanyDE> companyDE = findCompanyById(id);
+        if(companyDE.isPresent()){
+            companyDE.get().setEstadoAlta(false);
+            return this.companyMapper.deToDTO(this.companyRepository.save(companyDE.get()));
         }else
             throw new CompanyException(HttpStatus.NOT_FOUND, "Id doesn't find", CodeError.C404);
     }
-    //TODO: Creo que seria una mejora, debido a que podemos filtrar directamente sobre los registros activos (estadoAlta = true)
     private Optional<CompanyDE> findCompanyById(Long id) {
         return this.findCompaniesEnabled().stream().filter(companyDE -> Objects.equals(companyDE.getId(), id)).findFirst();
     }
-    //TODO: Comprobar si esta bien, podria utilizar este metodo en getAll y en ese metodo realizar el mapeo? Asi tengo findCompaniesEnabled (retorna DEs)
-    // y getCompaniesEnabled (retorna DTOs)
     private List<CompanyDE> findCompaniesEnabled (){
         return this.companyRepository.findAll().stream()
                 .filter(CompanyDE::getEstadoAlta)

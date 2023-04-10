@@ -24,8 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTest {
@@ -196,6 +195,15 @@ public class CompanyServiceTest {
         when(this.companyRepository.save(any(CompanyDE.class))).thenReturn(this.company);
         when(this.companyMapper.deToDTO(this.company)).thenReturn(this.companyDTO);
         assertEquals(this.companyDTO, this.companyService.deleteByID(this.company.getId()));
+        verify(this.companyRepository).save(this.company);
+    }
+
+    @Test
+    @DisplayName("Deberia retornar una excepcion al borrar algo inexistente")
+    public void shouldReturnCompanyExceptionIdNotFound() {
+        initEmptyCompaniesDE();
+        when(this.companyRepository.findAll()).thenReturn(this.emptyCompaniesDE);
+        assertThrows(CompanyException.class, () -> this.companyService.deleteByID(this.company.getId()));
     }
 
 /*
