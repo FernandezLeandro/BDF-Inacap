@@ -3,7 +3,9 @@ package com.bdf.inacap.rest.controller.company;
 import com.bdf.inacap.domain.mapper.CompanyMapper;
 import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import com.bdf.inacap.service.interfaces.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -42,7 +44,7 @@ public class CompanyController implements CompanyAPI{
 
     @Override
     @PostMapping
-    public ResponseEntity<CompanyDTO> create(CompanyDTO companyDTO) {
+    public ResponseEntity<CompanyDTO> create(@Valid CompanyDTO companyDTO) {
        return ResponseEntity.ok(this.companyService.save(companyDTO));
     }
 

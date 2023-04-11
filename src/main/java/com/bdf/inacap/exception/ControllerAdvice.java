@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -12,6 +13,14 @@ import java.util.List;
 
 @RestControllerAdvice
 public class ControllerAdvice {
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDTO> argumentExceptionHandler(MethodArgumentNotValidException e) {
+        BindingResult result = e.getBindingResult();
+        StringBuilder errorMessage = getErrorMessage(result);
+        ErrorDTO error = ErrorDTO.builder().message(errorMessage.toString()).code(CodeError.C400).build();
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 
     private StringBuilder getErrorMessage(BindingResult result) {
         List<FieldError> fieldErrors = result.getFieldErrors();
