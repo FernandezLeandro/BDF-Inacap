@@ -237,6 +237,13 @@ public class CompanyServiceTest {
         assertThrows(CompanyException.class, () -> this.companyService.deleteByID(this.company.getId()));
     }
 
+    @Test
+    public void shouldReturnTrueFilter() {
+        CompanyDE compa = generator.nextObject(CompanyDE.class);
+        compa.setCuit(this.company.getCuit());
+        when(this.companyRepository.findAll()).thenReturn(Arrays.asList(this.company));
+        assertTrue(this.companyService.alreadyExistCompany(compa));
+    }
 /*
     @Test
     public void shouldFailCompanyException() {

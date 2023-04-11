@@ -8,6 +8,7 @@ import com.bdf.inacap.repository.CompanyRepository;
 import com.bdf.inacap.rest.controller.dto.CompanyDTO;
 import com.bdf.inacap.service.interfaces.CompanyService;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -43,12 +44,26 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDTO save(CompanyDTO newCompany) {
         CompanyDE companyDE = this.companyMapper.dtoToDE(newCompany);
-        if (newCompany.getNameCompany() == null || newCompany.getNameCompany() == "") {
-            throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
-        }
-        companyDE.setEstadoAlta(true);
-        return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
+        if(alreadyExistCompany(companyDE)){
+            throw new CompanyException(HttpStatus.BAD_REQUEST, "Company already exist", CodeError.C400);
+        } else {
+            if (!isCompanyValid(newCompany)) {
+                throw new CompanyException(HttpStatus.BAD_REQUEST, "Name is null", CodeError.C400);
+            } else {
+                companyDE.setEstadoAlta(true);
+                return this.companyMapper.deToDTO(this.companyRepository.save(companyDE));
+            }
 
+        }
+
+    }
+
+    private boolean isCompanyValid(CompanyDTO newCompany) {
+        return newCompany.getNameCompany() != null && newCompany.getNameCompany() != "";
+    }
+
+    public boolean alreadyExistCompany(CompanyDE company) {
+        return findCompaniesEnabled().stream().anyMatch(companyDE -> Objects.equals(companyDE.getCuit(), company.getCuit()));
     }
 
     @Override
