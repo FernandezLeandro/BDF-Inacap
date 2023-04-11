@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -15,37 +16,29 @@ public class Cheque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     private Integer actaId;
 
     @ManyToOne
     private Banco bancoDeposito;
 
-    @Basic
     private String nroCheque;
 
     @Temporal(TemporalType.DATE)
     private Date fechaAcreditacion;
 
-    @Basic
     private Observacion estadoObservacion;
 
-    @Basic
     private String observaciones;
 
-    @Basic
     private Double importe;
 
-    @Basic
     private String nroCuenta;
 
-    @Basic
     private String codigoPostal;
 
     @ManyToOne
     private Empresa empresa;
 
-    @Basic
     @Column(nullable = false)
     private Boolean borrado;
 

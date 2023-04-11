@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -23,11 +22,9 @@ public class EstadoItemLegal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Basic
     @Column(nullable = false, unique = true)
     String nombre;
 
-    @Basic
     @Column(nullable = false)
     String descripcion;
 

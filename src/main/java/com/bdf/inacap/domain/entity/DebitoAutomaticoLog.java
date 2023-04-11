@@ -2,8 +2,7 @@ package com.bdf.inacap.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @NoArgsConstructor
@@ -21,31 +20,27 @@ public class DebitoAutomaticoLog {
     @ManyToOne
     private DebitoAutomatico debitoAutomatico;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaAcreditacion;
+  //  @Temporal(TemporalType.DATE)
+    private LocalDateTime fechaAcreditacion;
 
     @ManyToOne
     private Banco banco;
 
-
-    @Basic
     private String cbu;
 
     //Fecha en la que el Banco informa que pudo cobrar
-    @Temporal(TemporalType.DATE)
-    private Date fechaRecepcion;
+ //   @Temporal(TemporalType.DATE)
+    private LocalDateTime fechaRecepcion;
 
-    @Basic
     private Double importe;
 
     @Enumerated
     @Column(nullable = false)
     private EstadoDebitoAutomatico estado;
 
-    @Temporal(TemporalType.DATE)
-    private Date fechaModificacion;
+ //   @Temporal(TemporalType.DATE)
+    private LocalDateTime fechaModificacion;
 
-    @Basic
     @Column(nullable = false)
     private String usuario;
 

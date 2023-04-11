@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,8 +44,8 @@ public class DebitoAutomatico {
     private String cbu;
 
     // Fecha en la que el Banco informa que pudo cobrar
-    @Temporal(TemporalType.DATE)
-    private Date fechaRecepcion;
+ //   @Temporal(TemporalType.DATE)
+    private LocalDateTime fechaRecepcion;
 
     @Basic
     private String observaciones;
@@ -89,9 +90,9 @@ public class DebitoAutomatico {
         debitoAutomaticoLog.setBanco(getBancoDeposito());
         debitoAutomaticoLog.setCbu(getCbu());
         debitoAutomaticoLog.setEstado(getEstado());
-        debitoAutomaticoLog.setFechaAcreditacion(getFechaAcreditacion());
+      //  debitoAutomaticoLog.setFechaAcreditacion(getFechaAcreditacion());
         debitoAutomaticoLog.setFechaRecepcion(getFechaRecepcion());
-        debitoAutomaticoLog.setFechaModificacion(new Date(System.currentTimeMillis()));
+     //   debitoAutomaticoLog.setFechaModificacion(new Date(System.currentTimeMillis()));
         debitoAutomaticoLog.setImporte(getImporte());
         debitoAutomaticoLog.setUsuario(userLogin);
     }

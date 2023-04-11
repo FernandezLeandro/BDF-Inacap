@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.CascadeType;
@@ -29,7 +28,6 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     @Column(unique = true, nullable = false)
     private String nombre;
 
@@ -37,23 +35,18 @@ public class Rol {
     @JoinTable(name = "roles_menues")
     private List<Menu> menues;
 
-    @Basic
     @Column(name = "mirror")
     private boolean mirror;
 
-    @Basic
     @Column(name = "produccion")
     private boolean produccion;
 
-    @Basic
     @Column(name = "fiscal")
     private boolean fiscal;
 
-    @Basic
     @Column(name = "aprobador")
     private boolean aprobador;
 
-    @Basic
     @Column(name = "adminFiscal")
     private boolean adminFiscal;
 }

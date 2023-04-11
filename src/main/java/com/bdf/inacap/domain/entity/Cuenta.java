@@ -16,11 +16,9 @@ public class Cuenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     @Column(unique = true, nullable = false)
     private String nombre;
 
-    @Basic
     @Column(unique = true, nullable = false)
     private String numero;
 

@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
@@ -39,15 +38,12 @@ public class ItemPlanLegal {
     @OneToOne
     BoletaEmitida boleta;
 
-    @Basic
     @Column(nullable = false)
     Long cantidadEmpleados;
 
-    @Basic
     @Column(nullable = false)
     Double monto;
 
-    @Basic
     @Column(nullable = false)
     Double intereses;
 

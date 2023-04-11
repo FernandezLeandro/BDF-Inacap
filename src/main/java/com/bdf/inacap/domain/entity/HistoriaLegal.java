@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -28,7 +28,7 @@ public class HistoriaLegal {
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Calendar fecha;
+    private LocalDateTime fecha;
 
     @ManyToOne
     ItemLegal item;
@@ -42,7 +42,7 @@ public class HistoriaLegal {
     public HistoriaLegal(ItemLegal item, Usuario usuario) {
         this.setItem(item);
         this.setUsuario(usuario);
-        this.setFecha(Calendar.getInstance());
+        this.setFecha(LocalDateTime.now());
         this.setEstadoItem(item.getEstado());
     }
 }

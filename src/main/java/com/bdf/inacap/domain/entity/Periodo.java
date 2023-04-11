@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -29,7 +28,6 @@ public class Periodo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     @Column(nullable = false, length = 7, name = "periodo")
     private String periodo;
 
@@ -37,7 +35,6 @@ public class Periodo {
     @Temporal(TemporalType.DATE)
     private Calendar vencimiento;
 
-    @Basic
     @Column(nullable = false, name = "habilitadoEmision")
     private Boolean habilitadoEmision = true;
 

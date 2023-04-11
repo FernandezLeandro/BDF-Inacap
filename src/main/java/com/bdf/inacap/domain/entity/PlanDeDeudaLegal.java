@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Basic;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
@@ -18,7 +17,6 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.Getter;
 import lombok.Setter;
@@ -60,7 +58,6 @@ public class PlanDeDeudaLegal {
     @OneToMany(mappedBy = "plan")
     List<ItemPlanLegal> items;
 
-    @Basic
     String observaciones;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -1,8 +1,8 @@
 package com.bdf.inacap.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -60,8 +60,8 @@ public class Usuario implements UserDetails {
     @Column(name = "aprobadorCantidadPagos")
     private boolean aprobadorCantidadPagos;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaCambioContrasena;
+  //  @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime fechaCambioContrasena;
 
     @Transient
     private boolean alreadyEncripted = false;

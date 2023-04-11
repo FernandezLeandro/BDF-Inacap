@@ -45,22 +45,16 @@ public class PlanDePago {
     @Column(nullable = false)
     private EstadoEnum estadoBoleta;
 
-    @Basic
     private Integer empleadosAbonado;
 
-    @Basic
     private Integer empleadosAuditado;
 
-    @Basic
     private Double nominalAPagar;
 
-    @Basic
     private Double intereses;
 
-    @Basic
     private Date fechaCalcIntereses;
 
-    @Basic
     private Date fechaPago;
 
     @Transient
@@ -72,7 +66,6 @@ public class PlanDePago {
     @ManyToOne
     private DebitoAutomatico debitoAutomatico;
 
-    @Basic
     @Column(nullable = false)
     private Boolean borrado;
 

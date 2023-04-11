@@ -8,16 +8,12 @@ import lombok.Data;
 @Embeddable
 public class Contacto {
 
-    @Basic
     String nombre;
 
-    @Basic
     String apellido;
 
-    @Basic
     String mail;
 
-    @Basic
     String telefono;
 
 

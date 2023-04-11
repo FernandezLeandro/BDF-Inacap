@@ -3,7 +3,6 @@ package com.bdf.inacap.domain.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
@@ -27,15 +26,12 @@ public class TipoItemLegal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     @Column(nullable = false)
     String nombre;
 
-    @Basic
     @Column(nullable = false, length = 2)
     String codigo;
 
-    @Basic
     @Column(nullable = false)
     String descripcion;
 

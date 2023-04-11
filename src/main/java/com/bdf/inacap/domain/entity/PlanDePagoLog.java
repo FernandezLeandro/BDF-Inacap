@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -12,8 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -25,7 +23,6 @@ public class PlanDePagoLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     @Column
     private Long idPlanDePago;
 
@@ -38,46 +35,34 @@ public class PlanDePagoLog {
     @ManyToOne
     private Periodo periodo;
 
-    @Basic
     private Double periodoValor;
 
-    @Basic
     private Integer empleadosAbonado;
 
-    @Basic
     private Double importeAbonado;
 
-    @Basic
     private Double interesesAbonado;
 
-    @Basic
     private Integer empleadosAuditado;
 
-    @Basic
     private Double nominalAPagar;
 
-    @Basic
     private Double intereses;
 
-    @Basic
-    private Date fechaCalcIntereses;
+    private LocalDateTime fechaCalcIntereses;
 
-    @Basic
-    private Date fechaPago;
+    private LocalDateTime fechaPago;
 
     @ManyToOne
     private Cheque cheque;
 
-
-    @Basic
     @Column(nullable = false)
     private Boolean borrado;
 
     @Column(nullable = false, length = 50)
     private String usuarioUltimaModif;
 
-    @Basic
     @Column(nullable = false)
-    private Calendar fechaUltimaModif;
+    private LocalDateTime fechaUltimaModif;
 
 }

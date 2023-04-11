@@ -3,7 +3,7 @@ package com.bdf.inacap.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -21,10 +21,10 @@ public class Certificado {
     Usuario usuario;
 
     @Temporal(TemporalType.TIMESTAMP)
-    Calendar fecha;
+    LocalDateTime fecha;
 
     public Certificado() {
-        fecha = Calendar.getInstance();
+        fecha = LocalDateTime.now();
     }
 
     public Certificado(Usuario usuario, Acta acta) {

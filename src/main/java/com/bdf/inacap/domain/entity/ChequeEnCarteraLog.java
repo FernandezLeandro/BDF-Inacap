@@ -26,7 +26,6 @@ public class ChequeEnCarteraLog {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date fecha;
 
-    @Basic
     protected String usuario;
 
     @OneToOne
@@ -40,7 +39,6 @@ public class ChequeEnCarteraLog {
     @ManyToOne
     private Banco bancoDeposito;
 
-    @Basic
     private String nroCheque;
 
     // Fecha en la que el cheque es recibido en la cartera.
@@ -67,14 +65,11 @@ public class ChequeEnCarteraLog {
     private EstadoCheque estado;
 
     // Detalle el algún cambio.
-    @Basic
     private String observaciones;
 
     // Estado con el que proviene del acta. Si hubo cambios o no.
-    @Basic
     private Observacion estadoObservacion;
 
-    @Basic
     private BigDecimal importe;
 
     // Empresa a la que corresponde el cheque.
@@ -85,7 +80,6 @@ public class ChequeEnCarteraLog {
     @OneToOne
     private ChequeEnCartera reemplazado;
 
-    @Basic
     @Column(nullable = false)
     private Boolean borrado;
 

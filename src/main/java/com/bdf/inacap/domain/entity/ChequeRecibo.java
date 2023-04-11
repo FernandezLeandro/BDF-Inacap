@@ -17,16 +17,13 @@ public class ChequeRecibo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Basic
     private Long nroRecibo;
 
     @ManyToOne
     private Acta acta;
 
-    @Basic
     private String banco;
 
-    @Basic
     private String nroCheque;
 
     @Temporal(TemporalType.DATE)
@@ -35,13 +32,10 @@ public class ChequeRecibo {
     @Enumerated
     private EstadoChequeRecibo estado;
 
-    @Basic
     private String observaciones;
 
-    @Basic
     private Double importe;
 
-    @Basic
     @Column(nullable = false)
     private Boolean borrado;
 

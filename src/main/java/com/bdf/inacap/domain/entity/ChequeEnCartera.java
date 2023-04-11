@@ -27,8 +27,7 @@ public class ChequeEnCartera {
 	//Banco donde se deposita el cheque.
 	@ManyToOne
 	private Banco bancoDeposito;
-	
-	@Basic
+
 	private String nroCheque;
 	
 	//Fecha en la que el cheque es recibido en la cartera.
@@ -55,14 +54,11 @@ public class ChequeEnCartera {
 	private EstadoCheque estado;
 	
 	//Detalle el algún cambio.
-	@Basic
 	private String observaciones;
 	
-	//Estado con el que proviene del acta. Si hubo cambios o no. 
-	@Basic 
+	//Estado con el que proviene del acta. Si hubo cambios o no.
 	private Observacion estadoObservacion;
-	
-	@Basic
+
 	private BigDecimal importe;
 	
 	//Empresa a la que corresponde el cheque. 
@@ -72,8 +68,7 @@ public class ChequeEnCartera {
 	//Cheque al que reemplaza. 
 	@OneToOne
 	private ChequeEnCartera reemplazado;
-	
-	@Basic
+
 	@Column(nullable=false)
 	private Boolean borrado;
 
